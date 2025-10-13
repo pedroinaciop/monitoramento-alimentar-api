@@ -25,13 +25,13 @@ public class Usuario implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 60, nullable = false)
+    @Column(length = 80, nullable = false)
     private String nomeCompleto;
 
-    @Column(length = 60, unique = true, nullable = false)
+    @Column(length = 120, unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(length = 30, nullable = false)
     private String senha;
 
     @Column(nullable = false)
@@ -41,14 +41,14 @@ public class Usuario implements UserDetails {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
     private LocalDateTime dataUpdate;
 
-    @Column(length = 60)
+    @Column(length = 80)
     private String usuarioUpdate;
 
     @Column(updatable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
     private LocalDateTime dataCriacao;
 
-    @Column(length = 60, updatable = false)
+    @Column(length = 80, updatable = false)
     private String usuarioCriacao;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)

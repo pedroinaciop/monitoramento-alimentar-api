@@ -1,16 +1,15 @@
 package com.monitoramento.saude.controller;
 
-import com.monitoramento.saude.dto.UserDTO;
-import com.monitoramento.saude.model.Medidas;
-import com.monitoramento.saude.service.UserService;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import jakarta.transaction.Transactional;
+import com.monitoramento.saude.dto.UserDTO;
+import org.springframework.web.bind.annotation.*;
+import com.monitoramento.saude.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("/api/")
-public class UserController {
+public class UsuarioController {
 
     @Autowired
     private UserService service;

@@ -21,13 +21,10 @@ public class Medidas {
     private LocalDate dataRegistro;
 
     private BigDecimal pesoAtual;
-
     private BigDecimal pesoDesejado;
 
     private BigDecimal medidaCintura;
-
     private BigDecimal medidaQuadril;
-
     private BigDecimal medidaTorax;
 
     private BigDecimal medidaBracoDireito;

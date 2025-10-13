@@ -2,10 +2,10 @@ package com.monitoramento.saude.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import com.monitoramento.saude.model.Usuario;
 import com.monitoramento.saude.dto.UserDTO;
-import com.monitoramento.saude.repository.UsuarioRepository;
+import com.monitoramento.saude.model.Usuario;
 import org.springframework.stereotype.Service;
+import com.monitoramento.saude.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

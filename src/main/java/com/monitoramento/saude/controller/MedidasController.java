@@ -1,14 +1,12 @@
 package com.monitoramento.saude.controller;
 
-import com.monitoramento.saude.dto.MedidasRequestDTO;
-import com.monitoramento.saude.dto.MedidasResponseDTO;
-import com.monitoramento.saude.model.Medidas;
-import com.monitoramento.saude.service.MedidasService;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
+import jakarta.transaction.Transactional;
+import org.springframework.web.bind.annotation.*;
+import com.monitoramento.saude.dto.MedidasRequestDTO;
+import com.monitoramento.saude.service.MedidasService;
+import com.monitoramento.saude.dto.MedidasResponseDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("/api/")
