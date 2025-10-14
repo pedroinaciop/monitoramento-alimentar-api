@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("/api/")
 public class InfoUsuarioController {
 
-    @Autowired
-    public InfoUsuarioService service;
+    private final InfoUsuarioService service;
+
+    public InfoUsuarioController(InfoUsuarioService service) {
+        this.service = service;
+    }
 
     @GetMapping("/info/usuarios/{id}")
     public InfoUsuario findUserById(@PathVariable("id") Long id) {
@@ -26,7 +29,7 @@ public class InfoUsuarioController {
     }
 
     @DeleteMapping("/info/usuarios/{id}")
-    public void deleteInfoUser(@PathVariable("id") Long id ) {
+    public void deleteInfoUser(@PathVariable("id") Long id) {
         service.deleteInfoUser(id);
     }
 }

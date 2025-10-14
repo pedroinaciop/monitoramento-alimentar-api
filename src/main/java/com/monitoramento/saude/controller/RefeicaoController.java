@@ -1,5 +1,6 @@
 package com.monitoramento.saude.controller;
 
+import com.monitoramento.saude.dto.RefeicaoRequestDTO;
 import com.monitoramento.saude.dto.RefeicaoResponseDTO;
 import com.monitoramento.saude.service.RefeicaoService;
 import jakarta.transaction.Transactional;
@@ -29,7 +30,7 @@ public class RefeicaoController {
 
     @Transactional
     @PostMapping("/cadastro/refeicao/novo")
-    public void createRefeicao(@RequestBody RefeicaoResponseDTO dados) {
+    public void createRefeicao(@RequestBody RefeicaoRequestDTO dados) {
         service.createRefeicao(dados);
     }
 

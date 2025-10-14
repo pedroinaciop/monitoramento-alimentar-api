@@ -2,6 +2,7 @@ package com.monitoramento.saude.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.monitoramento.saude.dto.RefeicaoResponseDTO;
 import com.monitoramento.saude.enums.TipoRefeicao;
 import jakarta.persistence.*;
@@ -31,7 +32,13 @@ public class Refeicao {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "refeicao", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Alimento> alimentos = new ArrayList<>();
+
+    public void adicionarAlimento(Alimento alimento) {
+        alimento.setRefeicao(this);
+        alimentos.add(alimento);
+    }
 
     public Refeicao() {}
 
