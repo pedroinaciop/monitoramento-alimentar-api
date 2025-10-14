@@ -1,5 +1,6 @@
 package com.monitoramento.saude.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.*;
@@ -22,6 +23,7 @@ public class Alimento {
 
     @ManyToOne
     @JoinColumn(name = "refeicao_id")
+    @JsonBackReference
     private Refeicao refeicao;
 
     public Alimento() {}

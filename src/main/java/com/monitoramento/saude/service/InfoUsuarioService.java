@@ -15,10 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class InfoUsuarioService {
 
-    private InfoUsuarioRepository repository;
+    private final InfoUsuarioRepository repository;
     private final ObjectMapper objectMapper;
 
-    @Autowired
     public InfoUsuarioService(InfoUsuarioRepository repository, ObjectMapper objectMapper) {
         this.repository = repository;
         this.objectMapper = objectMapper;

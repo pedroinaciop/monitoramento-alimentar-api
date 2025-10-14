@@ -2,7 +2,6 @@ package com.monitoramento.saude.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.monitoramento.saude.enums.TipoRefeicao;
-import com.monitoramento.saude.model.Alimento;
 import com.monitoramento.saude.model.Usuario;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,5 +15,5 @@ public record RefeicaoRequestDTO (
 
         Usuario usuario,
 
-        List<Alimento> alimentos) {
+        List<AlimentoRequestDTO> alimentos) {
 }

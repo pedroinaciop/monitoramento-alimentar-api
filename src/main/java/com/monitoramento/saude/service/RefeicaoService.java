@@ -1,7 +1,12 @@
 package com.monitoramento.saude.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.monitoramento.saude.dto.RefeicaoRequestDTO;
+import com.monitoramento.saude.model.Alimento;
 import com.monitoramento.saude.model.Refeicao;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monitoramento.saude.dto.RefeicaoResponseDTO;
@@ -31,9 +36,28 @@ public class RefeicaoService {
                 .toList();
     }
 
-    public void createRefeicao(RefeicaoResponseDTO dados) {
-        Refeicao refeicao = repository.save(new Refeicao(dados));
-        objectMapper.convertValue(refeicao, RefeicaoResponseDTO.class);
+    @Transactional
+    public RefeicaoResponseDTO createRefeicao(RefeicaoRequestDTO dados) {
+        Refeicao refeicao = new Refeicao();
+        refeicao.setDataRegistro(dados.dataRegistro());
+        refeicao.setTipoRefeicao(dados.tipoRefeicao());
+        refeicao.setUsuario(dados.usuario());
+
+        Refeicao finalRefeicao = refeicao;
+        refeicao.setAlimentos(
+                dados.alimentos().stream().map(a -> {
+                    Alimento alimento = new Alimento();
+                    alimento.setNomeAlimento(a.nomeAlimento());
+                    alimento.setUnidadeAlimento(a.unidadeAlimento());
+                    alimento.setQuantidadeAlimento(a.quantidadeAlimento());
+                    alimento.setRefeicao(finalRefeicao);
+                    return alimento;
+                }).collect(Collectors.toList())
+        );
+
+        refeicao = repository.save(refeicao);
+
+        return objectMapper.convertValue(refeicao, RefeicaoResponseDTO.class);
     }
 
     public void deleteRefeicao(Long id) {
