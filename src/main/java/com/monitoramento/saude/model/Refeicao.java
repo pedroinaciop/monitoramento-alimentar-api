@@ -26,6 +26,9 @@ public class Refeicao {
     @Enumerated(EnumType.STRING)
     private TipoRefeicao tipoRefeicao;
 
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+    private LocalDateTime dataAlteracao;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     @JsonIgnore
@@ -42,12 +45,13 @@ public class Refeicao {
 
     public Refeicao() {}
 
-    public Refeicao(Long id, LocalDateTime dataRegistro, TipoRefeicao tipoRefeicao, Usuario usuario, List<Alimento> alimentos) {
+    public Refeicao(Long id, LocalDateTime dataRegistro, TipoRefeicao tipoRefeicao, Usuario usuario, List<Alimento> alimentos, LocalDateTime dataAlteracao) {
         this.id = id;
         this.dataRegistro = dataRegistro;
         this.tipoRefeicao = tipoRefeicao;
         this.usuario = usuario;
         this.alimentos = alimentos;
+        this.dataAlteracao = dataAlteracao;
     }
 
     public Refeicao(RefeicaoResponseDTO dados) {
@@ -55,5 +59,6 @@ public class Refeicao {
         tipoRefeicao = dados.tipoRefeicao();
         usuario = dados.usuario();
         alimentos = dados.alimentos();
+        dataAlteracao = dados.dataAlteracao();
     }
 }

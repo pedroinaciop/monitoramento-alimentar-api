@@ -9,9 +9,16 @@ import java.util.List;
 
 public record RefeicaoResponseDTO (
         Long id,
+
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "America/Sao_Paulo")
         LocalDateTime dataRegistro,
+
         TipoRefeicao tipoRefeicao,
+
         Usuario usuario,
-        List<Alimento> alimentos) {
+
+        List<Alimento> alimentos,
+
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
+        LocalDateTime dataAlteracao) {
 }

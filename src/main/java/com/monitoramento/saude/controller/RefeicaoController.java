@@ -35,6 +35,12 @@ public class RefeicaoController {
     }
 
     @Transactional
+    @PutMapping("/editar/refeicao/{id}")
+    public RefeicaoResponseDTO editarRefeicao(@PathVariable("id") Long id, @RequestBody RefeicaoRequestDTO dados) {
+        return service.editarRefeicao(id, dados);
+    }
+
+    @Transactional
     @DeleteMapping("/refeicao/{id}")
     public void deleteRefeicao(@PathVariable("id") Long id) {
         service.deleteRefeicao(id);

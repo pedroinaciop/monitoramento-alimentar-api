@@ -1,12 +1,10 @@
 package com.monitoramento.saude.controller;
 
-import com.monitoramento.saude.repository.AlimentoRepository;
+import com.monitoramento.saude.dto.AlimentoRequestDTO;
+import com.monitoramento.saude.dto.AlimentoResponseDTO;
 import com.monitoramento.saude.service.AlimentoService;
 import jakarta.transaction.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/")
@@ -16,6 +14,18 @@ public class AlimentoController {
 
     public AlimentoController(AlimentoService service) {
         this.service = service;
+    }
+
+    @Transactional
+    @GetMapping("/alimento/{id}")
+    public AlimentoResponseDTO findAlimentoById(@PathVariable("id") Long id) {
+        return service.findAlimentoByID(id);
+    }
+
+    @Transactional
+    @PutMapping("/editar/alimento/{id}")
+    public AlimentoResponseDTO editarAlimento(@PathVariable("id") Long id, @RequestBody AlimentoRequestDTO dados) {
+        return service.editarAlimento(id, dados);
     }
 
     @Transactional

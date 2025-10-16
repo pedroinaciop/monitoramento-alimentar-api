@@ -5,6 +5,7 @@ import com.monitoramento.saude.dto.MedidasResponseDTO;
 import com.monitoramento.saude.dto.MedidasRequestDTO;
 import com.monitoramento.saude.model.Medidas;
 import com.monitoramento.saude.repository.MedidasRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,10 +38,32 @@ public class MedidasService {
 
     public void createMedida(MedidasRequestDTO dados) {
         Medidas medida = repository.save(new Medidas(dados));
-        objectMapper.convertValue(medida, MedidasResponseDTO.class);
+        objectMapper.convertValue(medida, MedidasRequestDTO.class);
     }
 
     public void deleteMedida(Long id) {
         repository.deleteById(id);
+    }
+
+    public MedidasResponseDTO editarMedidas(Long id, MedidasRequestDTO dados) {
+        Medidas medida = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Medida não encontrada!"));
+
+        medida.setPesoAtual(dados.pesoAtual());
+        medida.setPesoDesejado(dados.pesoDesejado());
+        medida.setMedidaCintura(dados.medidaCintura());
+        medida.setMedidaQuadril(dados.medidaQuadril());
+        medida.setMedidaTorax(dados.medidaTorax());
+        medida.setMedidaBracoDireito(dados.medidaBracoDireito());
+        medida.setMedidaBracoEsquerdo(dados.medidaBracoEsquerdo());
+        medida.setMedidaCoxaDireita(dados.medidaCoxaDireita());
+        medida.setMedidaCoxaEsquerda(dados.medidaCoxaEsquerda());
+        medida.setMedidaPanturrilhaDireita(dados.medidaPanturrilhaDireita());
+        medida.setMedidaPanturrilhaEsquerda(dados.medidaPanturrilhaEsquerda());
+        medida.setAltura(dados.altura());
+        medida.setDataAlteracao(dados.dataAlteracao());
+
+        Medidas medidaAtualizada = repository.save(medida);
+        return objectMapper.convertValue(medidaAtualizada, MedidasResponseDTO.class);
     }
 }

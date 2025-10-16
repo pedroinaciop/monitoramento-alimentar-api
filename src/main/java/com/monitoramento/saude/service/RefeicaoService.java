@@ -3,9 +3,12 @@ package com.monitoramento.saude.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.monitoramento.saude.dto.AlimentoRequestDTO;
 import com.monitoramento.saude.dto.RefeicaoRequestDTO;
 import com.monitoramento.saude.model.Alimento;
 import com.monitoramento.saude.model.Refeicao;
+import com.monitoramento.saude.repository.AlimentoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,10 +19,12 @@ import com.monitoramento.saude.repository.RefeicaoRepository;
 public class RefeicaoService {
 
     private final RefeicaoRepository repository;
+    private final AlimentoRepository repositoryAlimento;
     private final ObjectMapper objectMapper;
 
-    public RefeicaoService(RefeicaoRepository repository, ObjectMapper objectMapper) {
+    public RefeicaoService(RefeicaoRepository repository, AlimentoRepository repositoryAlimento, ObjectMapper objectMapper) {
         this.repository = repository;
+        this.repositoryAlimento = repositoryAlimento;
         this.objectMapper = objectMapper;
     }
 
@@ -56,11 +61,35 @@ public class RefeicaoService {
         );
 
         refeicao = repository.save(refeicao);
-
         return objectMapper.convertValue(refeicao, RefeicaoResponseDTO.class);
     }
 
     public void deleteRefeicao(Long id) {
         repository.deleteById(id);
+    }
+
+    public RefeicaoResponseDTO editarRefeicao(Long id, RefeicaoRequestDTO dados) {
+        Refeicao refeicao = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Refeição não encontrada!"));
+
+        refeicao.setDataRegistro(dados.dataRegistro());
+        refeicao.setTipoRefeicao(dados.tipoRefeicao());
+        List<Alimento> alimentosAtualizados = dados.alimentos().stream().map(a -> {
+            Alimento alimento = (a.id() != null)
+                    ? repositoryAlimento.findById(a.id()).orElse(new Alimento())
+                    : new Alimento();
+            alimento.setNomeAlimento(a.nomeAlimento());
+            alimento.setUnidadeAlimento(a.unidadeAlimento());
+            alimento.setQuantidadeAlimento(a.quantidadeAlimento());
+            alimento.setRefeicao(refeicao);
+            return alimento;
+        }).collect(Collectors.toList());
+
+        refeicao.getAlimentos().clear();
+        refeicao.getAlimentos().addAll(alimentosAtualizados);
+        refeicao.setDataAlteracao(dados.dataAlteracao());
+
+        Refeicao refeicaoAtualizada = repository.save(refeicao);
+        return objectMapper.convertValue(refeicaoAtualizada, RefeicaoResponseDTO.class);
     }
 }
