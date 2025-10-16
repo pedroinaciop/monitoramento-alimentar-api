@@ -1,5 +1,6 @@
 package com.monitoramento.saude.controller;
 
+import com.monitoramento.saude.dto.InfoUserResponseDTO;
 import com.monitoramento.saude.model.InfoUsuario;
 import jakarta.transaction.Transactional;
 import com.monitoramento.saude.dto.InfoUserRequestDTO;
@@ -28,6 +29,13 @@ public class InfoUsuarioController {
         service.createInfoUser(dados);
     }
 
+    @Transactional
+    @PutMapping("editar/info/usuarios/{id}")
+    public InfoUserResponseDTO editarInfoUser(@PathVariable("id") Long id, @RequestBody InfoUserRequestDTO dados) {
+        return service.editarInfoUser(id, dados);
+    }
+
+    @Transactional
     @DeleteMapping("/info/usuarios/{id}")
     public void deleteInfoUser(@PathVariable("id") Long id) {
         service.deleteInfoUser(id);

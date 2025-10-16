@@ -17,8 +17,8 @@ public class Medidas {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataRegistro;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "America/Sao_Paulo")
+    private LocalDateTime dataRegistro;
 
     private BigDecimal pesoAtual;
     private BigDecimal pesoDesejado;
@@ -48,7 +48,7 @@ public class Medidas {
 
     public Medidas() {}
 
-    public Medidas(Long id, LocalDate dataRegistro, BigDecimal pesoAtual, BigDecimal pesoDesejado, BigDecimal medidaCintura, BigDecimal medidaQuadril, BigDecimal medidaTorax, BigDecimal medidaBracoDireito, BigDecimal medidaBracoEsquerdo, BigDecimal medidaCoxaDireita, BigDecimal medidaCoxaEsquerda, BigDecimal medidaPanturrilhaDireita, BigDecimal medidaPanturrilhaEsquerda, BigDecimal altura, LocalDateTime dataAlteracao, Usuario usuario) {
+    public Medidas(Long id, LocalDateTime dataRegistro, BigDecimal pesoAtual, BigDecimal pesoDesejado, BigDecimal medidaCintura, BigDecimal medidaQuadril, BigDecimal medidaTorax, BigDecimal medidaBracoDireito, BigDecimal medidaBracoEsquerdo, BigDecimal medidaCoxaDireita, BigDecimal medidaCoxaEsquerda, BigDecimal medidaPanturrilhaDireita, BigDecimal medidaPanturrilhaEsquerda, BigDecimal altura, LocalDateTime dataAlteracao, Usuario usuario) {
         this.id = id;
         this.dataRegistro = dataRegistro;
         this.pesoAtual = pesoAtual;

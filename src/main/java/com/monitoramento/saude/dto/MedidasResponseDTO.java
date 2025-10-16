@@ -12,8 +12,9 @@ import java.time.LocalDateTime;
 
 public record MedidasResponseDTO(
         Long id,
-        @JsonFormat(pattern = "dd/MM/yyyy")
-        LocalDate dataRegistro,
+
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "America/Sao_Paulo")
+        LocalDateTime dataRegistro,
 
         BigDecimal pesoAtual,
 
@@ -34,10 +35,9 @@ public record MedidasResponseDTO(
 
         BigDecimal altura,
 
-        @JsonFormat(pattern = "dd/MM/yyyy")
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
         LocalDateTime dataAlteracao,
 
         @JsonIgnore
-        Usuario usuario
-) {
+        Usuario usuario) {
 }

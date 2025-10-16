@@ -16,6 +16,7 @@ public record InfoUserResponseDTO(
 
         @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate dataNascimento,
+
         Integer idade,
 
         Sexo sexoBiologico,

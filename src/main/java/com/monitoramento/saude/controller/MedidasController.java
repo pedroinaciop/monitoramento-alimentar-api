@@ -32,6 +32,12 @@ public class MedidasController {
     }
 
     @Transactional
+    @PutMapping("/editar/medida/{id}")
+    public MedidasResponseDTO editarMedida(@PathVariable("id") Long id, @RequestBody MedidasRequestDTO dados) {
+        return service.editarMedidas(id, dados);
+    }
+
+    @Transactional
     @DeleteMapping("/medida/{id}")
     public void deleteMedida(@PathVariable("id") Long id ) {
         service.deleteMedida(id);
