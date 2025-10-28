@@ -16,55 +16,12 @@ import java.util.Map;
 
 @Service
 public class RelatorioService {
-    public static final String ARQUIVOJRXML = "medidas.jrxml";
+    public static final String ARQUIVOJRXMLMEDIDAS = "medidas.jrxml";
+    public static final String ARQUIVOJRXMLREFEICOES = "refeicoes.jrxml";
     public static final Logger LOGGER = LoggerFactory.getLogger(RelatorioService.class);
-    public static final String DESTINOPDF = "C:\\jasper-report\\";
 
     @Autowired
     private DataSource dataSource;
-
-    public void relatorioMedidas(Long usuarioId, Date dataInicial, Date dataFinal) throws IOException {
-        Connection connection = null;
-
-        try {
-            Map<String, Object> params = new HashMap<>();
-            params.put("P_USUARIO_ID", usuarioId);
-            params.put("P_DATA_INICIAL", dataInicial);
-            params.put("P_DATA_FINAL", dataFinal);
-
-            String pathAbsoluto = getAbsultePath();
-            String folderDiretorio = getDiretorioSave("medidas");
-
-            // Compilar relatório
-            JasperReport report = JasperCompileManager.compileReport(pathAbsoluto);
-            LOGGER.info("Relatório compilado: {}", pathAbsoluto);
-
-            // ✅ USAR CONEXÃO COM BANCO EM VEZ DE JREmptyDataSource
-            connection = dataSource.getConnection();
-            LOGGER.info("Conexão com banco obtida");
-
-            JasperPrint print = JasperFillManager.fillReport(report, params, connection);
-            LOGGER.info("Relatório preenchido com dados do banco");
-
-            JasperExportManager.exportReportToPdfFile(print, folderDiretorio);
-            LOGGER.info("PDF exportado para: {}", folderDiretorio);
-
-        } catch (JRException e) {
-            throw new RuntimeException("Erro JasperReports: " + e.getMessage(), e);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao gerar relatório: " + e.getMessage(), e);
-        } finally {
-            // Fechar conexão
-            if (connection != null) {
-                try {
-                    connection.close();
-                    LOGGER.info("Conexão fechada");
-                } catch (Exception e) {
-                    LOGGER.error("Erro ao fechar conexão", e);
-                }
-            }
-        }
-    }
 
     public byte[] relatorioMedidasDownload(Long usuarioId, Date dataInicial, Date dataFinal) {
         LOGGER.info("usuarioId={}, dataInicial={}, dataFinal={}", usuarioId, dataInicial, dataFinal);
@@ -76,16 +33,47 @@ public class RelatorioService {
             params.put("P_DATA_INICIAL", dataInicial);
             params.put("P_DATA_FINAL", dataFinal);
 
-            String pathAbsoluto = getAbsultePath();
+            String pathAbsoluto = getAbsultePath(ARQUIVOJRXMLMEDIDAS);
 
             JasperReport report = JasperCompileManager.compileReport(pathAbsoluto);
             LOGGER.info("Relatório compilado");
 
-            // Usar conexão com banco
             connection = dataSource.getConnection();
             JasperPrint print = JasperFillManager.fillReport(report, params, connection);
 
-            // Retornar bytes para download
+            return JasperExportManager.exportReportToPdf(print);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao gerar relatório: " + e.getMessage(), e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+    public byte[] relatorioRefeicoesDownload(Long usuarioId, Date dataInicial, Date dataFinal) {
+        LOGGER.info("usuarioId={}, dataInicial={}, dataFinal={}", usuarioId, dataInicial, dataFinal);
+        Connection connection = null;
+
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("P_USUARIO_ID", usuarioId);
+            params.put("P_DATA_INICIAL", dataInicial);
+            params.put("P_DATA_FINAL", dataFinal);
+
+            String pathAbsoluto = getAbsultePath(ARQUIVOJRXMLREFEICOES);
+
+            JasperReport report = JasperCompileManager.compileReport(pathAbsoluto);
+            LOGGER.info("Relatório compilado");
+
+            connection = dataSource.getConnection();
+            JasperPrint print = JasperFillManager.fillReport(report, params, connection);
+
             return JasperExportManager.exportReportToPdf(print);
 
         } catch (Exception e) {
@@ -97,23 +85,11 @@ public class RelatorioService {
         }
     }
 
-    private String getDiretorioSave(String name) {
-        this.createDiretorio(DESTINOPDF);
-        return DESTINOPDF + name.concat(".pdf");
-    }
-
-    private void createDiretorio(String name) {
-        File dir = new File(name);
-        if(!dir.exists()){
-            dir.mkdir();
-        }
-    }
-
-    private String getAbsultePath() {
+    private String getAbsultePath(String file) {
         try {
-            return ResourceUtils.getFile(ARQUIVOJRXML).getAbsolutePath();
+            return ResourceUtils.getFile(file).getAbsolutePath();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Arquivo JRXML não encontrado: " + ARQUIVOJRXML, e);
+            throw new RuntimeException("Arquivo JRXML não encontrado: " + file, e);
         }
     }
 }

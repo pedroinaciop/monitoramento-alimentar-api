@@ -1,8 +1,6 @@
 package com.monitoramento.saude.dto;
 
-import java.sql.Date;
-
-public record MedidasRelatorio(
+public record RefeicoesRelatorioDTO(
         Long usuarioId,
         java.sql.Date dataInicial,
         java.sql.Date dataFinal) {
