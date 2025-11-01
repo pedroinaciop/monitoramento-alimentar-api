@@ -4,6 +4,7 @@ import com.monitoramento.saude.dto.AlimentoRequestDTO;
 import com.monitoramento.saude.dto.AlimentoResponseDTO;
 import com.monitoramento.saude.service.AlimentoService;
 import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,7 +31,7 @@ public class AlimentoController {
 
     @Transactional
     @DeleteMapping("/alimento/{id}")
-    public void deleteAlimento(@PathVariable("id") Long id) {
-        service.deleteAlimento(id);
+    public ResponseEntity<String> deleteAlimento(@PathVariable("id") Long id) {
+        return service.deleteAlimento(id);
     }
 }

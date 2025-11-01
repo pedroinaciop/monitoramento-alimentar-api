@@ -2,6 +2,7 @@ package com.monitoramento.saude.controller;
 
 import java.util.List;
 import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.monitoramento.saude.dto.MedidasRequestDTO;
 import com.monitoramento.saude.service.MedidasService;
@@ -39,7 +40,7 @@ public class MedidasController {
 
     @Transactional
     @DeleteMapping("/medida/{id}")
-    public void deleteMedida(@PathVariable("id") Long id ) {
-        service.deleteMedida(id);
+    public ResponseEntity<String> deleteMedida(@PathVariable("id") Long id ) {
+        return service.deleteMedida(id);
     }
 }

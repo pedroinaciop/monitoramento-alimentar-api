@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MedidasRepository extends JpaRepository<Medidas, Long> {
-    List<Medidas> findAllByUsuarioId(Long usuarioId);
+    List<Medidas> findAllByUsuarioIdOrderByDataRegistroDesc(Long usuarioId);
 }
