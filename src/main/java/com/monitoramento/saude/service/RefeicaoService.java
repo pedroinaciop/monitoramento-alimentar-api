@@ -1,6 +1,8 @@
 package com.monitoramento.saude.service;
 
+import java.sql.PreparedStatement;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.monitoramento.saude.dto.AlimentoRequestDTO;
@@ -10,6 +12,7 @@ import com.monitoramento.saude.model.Refeicao;
 import com.monitoramento.saude.repository.AlimentoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.monitoramento.saude.dto.RefeicaoResponseDTO;
@@ -35,7 +38,7 @@ public class RefeicaoService {
     }
 
     public List<RefeicaoResponseDTO> findAllRefeicoesById(Long usuarioId) {
-        List<Refeicao> refeicoes = repository.findAllByUsuarioId(usuarioId);
+        List<Refeicao> refeicoes = repository.findAllByUsuarioIdOrderByDataRegistroDesc(usuarioId);
         return refeicoes.stream()
                 .map(r -> objectMapper.convertValue(r, RefeicaoResponseDTO.class))
                 .toList();
@@ -64,8 +67,15 @@ public class RefeicaoService {
         return objectMapper.convertValue(refeicao, RefeicaoResponseDTO.class);
     }
 
-    public void deleteRefeicao(Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<String> deleteRefeicao(Long id) {
+        Optional<Refeicao> refeicao = repository.findById(id);
+
+        if (refeicao.isEmpty()) {
+            throw new EntityNotFoundException("Refeição não encontrada");
+        } else {
+            repository.deleteById(id);
+            return ResponseEntity.ok("Refeição com o ID " + id + " excluída com sucesso");
+        }
     }
 
     public RefeicaoResponseDTO editarRefeicao(Long id, RefeicaoRequestDTO dados) {

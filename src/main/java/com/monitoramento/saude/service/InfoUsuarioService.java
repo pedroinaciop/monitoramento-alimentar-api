@@ -5,8 +5,11 @@ import com.monitoramento.saude.dto.InfoUserResponseDTO;
 import com.monitoramento.saude.model.InfoUsuario;
 import com.monitoramento.saude.repository.InfoUsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.monitoramento.saude.dto.InfoUserRequestDTO;
+
+import java.util.Optional;
 
 @Service
 public class InfoUsuarioService {
@@ -28,8 +31,15 @@ public class InfoUsuarioService {
         objectMapper.convertValue(infoUsuario, InfoUserRequestDTO.class);
     }
 
-    public void deleteInfoUser(Long id) {
-        repository.deleteAll();
+    public ResponseEntity<String> deleteInfoUser(Long id) {
+        Optional<InfoUsuario> infoUsuario = repository.findById(id);
+
+        if (infoUsuario.isEmpty()) {
+            throw new EntityNotFoundException("Informação do usuário não encontrada");
+        } else {
+            repository.deleteById(id);
+            return ResponseEntity.ok("A informação do usuário com o ID " + id + " excluída com sucesso");
+        }
     }
 
     public InfoUserResponseDTO editarInfoUser(Long id, InfoUserRequestDTO dados) {

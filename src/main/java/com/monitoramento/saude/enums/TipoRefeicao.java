@@ -7,7 +7,7 @@ public enum TipoRefeicao {
     LANCHE("Lanche"),
     ALMOCO("Almoço"),
     CAFE_TARDE("Café da Tarde"),
-    JANTA("Jantar"),
+    JANTAR("Jantar"),
     CEIA("Ceia");
 
     private final String descricao;

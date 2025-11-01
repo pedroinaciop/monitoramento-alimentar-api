@@ -7,9 +7,11 @@ import com.monitoramento.saude.model.Medidas;
 import com.monitoramento.saude.repository.MedidasRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedidasService {
@@ -30,7 +32,7 @@ public class MedidasService {
     }
 
     public List<MedidasResponseDTO> findAllMedidasByUsuarioId(Long usuarioId) {
-        List<Medidas> medidas = repository.findAllByUsuarioId(usuarioId);
+        List<Medidas> medidas = repository.findAllByUsuarioIdOrderByDataRegistroDesc(usuarioId);
         return medidas.stream()
                 .map(m -> objectMapper.convertValue(m, MedidasResponseDTO.class))
                 .toList();
@@ -41,8 +43,15 @@ public class MedidasService {
         objectMapper.convertValue(medida, MedidasRequestDTO.class);
     }
 
-    public void deleteMedida(Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<String> deleteMedida(Long id) {
+        Optional<Medidas> medidas = repository.findById(id);
+
+        if (medidas.isEmpty()) {
+            throw new EntityNotFoundException("Medida não encontrada");
+        } else {
+            repository.deleteById(id);
+            return ResponseEntity.ok("Medida com o ID " + id + " excluída com sucesso");
+        }
     }
 
     public MedidasResponseDTO editarMedidas(Long id, MedidasRequestDTO dados) {

@@ -20,8 +20,8 @@
     i.sexo_biologico,
     r.tipo_refeicao,
     GROUP_CONCAT(
-        CONCAT(a.nome_alimento, ' ', a.quantidade_alimento, ' ', a.unidade_alimento, ' ')
-        SEPARATOR ', '
+        CONCAT(a.nome_alimento, ' -  ', a.quantidade_alimento, ' ', a.unidade_alimento, ' ')
+        SEPARATOR ', \n'
     ) AS alimentos
 FROM monitoramento_saude.usuario u
 INNER JOIN monitoramento_saude.info_usuario i
@@ -89,29 +89,34 @@ ORDER BY r.data_registro DESC;]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="150" splitType="Stretch">
+	<pageHeader>
+		<band height="150">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<image>
-				<reportElement x="40" y="23" width="168" height="105" uuid="6bed0377-2877-4bbc-97a4-7c32e8b9a3b0"/>
+				<reportElement x="40" y="23" width="168" height="105" uuid="eabf7871-114b-45bf-904e-c122f0c8172e"/>
 				<imageExpression><![CDATA["C:/Users/pedro/Documents/GitHub/Tarefas/logo_750.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="290" y="60" width="200" height="20" uuid="5fb9b5f6-6766-4969-8245-f7019b1e81fa"/>
+				<reportElement x="290" y="60" width="200" height="20" uuid="2155d662-f7ad-4aca-8193-126177dfbea0"/>
 				<textElement>
 					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RELATÓRIO DE MEDIDAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="261" y="86" width="78" height="20" uuid="b1c7ad49-9477-46ed-8a66-895219ce6a9c"/>
+				<reportElement x="261" y="86" width="78" height="20" uuid="c6deb23b-183c-49fb-acef-a4c0bfba279b"/>
 				<textElement verticalAlignment="Bottom">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Período Inicial:]]></text>
 			</staticText>
+			<textField evaluationTime="Page" pattern="dd/MM/yyyy">
+				<reportElement x="340" y="86" width="60" height="20" uuid="373cb38c-4965-4df8-a829-621637c8c0c9"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{P_DATA_INICIAL}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="400" y="86" width="70" height="20" uuid="f1c62a99-b3c2-4a05-9d90-95658dfd0410">
+				<reportElement x="400" y="86" width="70" height="20" uuid="0cbd9882-e467-4aa9-a5d6-f2f3f1a5971c">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Bottom">
@@ -119,18 +124,13 @@ ORDER BY r.data_registro DESC;]]>
 				</textElement>
 				<text><![CDATA[Período Final:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="339" y="86" width="61" height="20" uuid="05f33f8c-808d-46a3-b12a-9c329de995b2"/>
-				<textElement verticalAlignment="Bottom"/>
-				<textFieldExpression><![CDATA[$P{P_DATA_INICIAL}]]></textFieldExpression>
-			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="470" y="86" width="74" height="20" uuid="594980ce-df25-49bc-bb3b-d45508d476f4"/>
+				<reportElement x="470" y="86" width="60" height="20" uuid="a3955dae-7f76-423d-8424-893c02bfe610"/>
 				<textElement verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$P{P_DATA_FINAL}]]></textFieldExpression>
 			</textField>
 		</band>
-	</title>
+	</pageHeader>
 	<columnHeader>
 		<band height="70" splitType="Stretch">
 			<textField>
@@ -184,12 +184,6 @@ ORDER BY r.data_registro DESC;]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement stretchType="ElementGroupHeight" x="30" y="69" width="500" height="1" uuid="ce7f38fb-ec0c-4aba-bf5f-5be8a2f229b9">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
 			<staticText>
 				<reportElement x="41" y="0" width="139" height="31" uuid="993fc339-cca8-4dcb-8336-b2d9bb918ab3"/>
 				<textElement verticalAlignment="Middle">
@@ -200,44 +194,40 @@ ORDER BY r.data_registro DESC;]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="168" splitType="Stretch">
+		<band height="150" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="280" y="39" width="240" height="30" uuid="72b140f4-6a52-4481-99ff-ec02479a0154">
+				<reportElement x="282" y="30" width="239" height="30" uuid="72b140f4-6a52-4481-99ff-ec02479a0154">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41a5d8e7-a82c-4b34-a80e-de67ba8214f5"/>
 				</reportElement>
-				<textElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<topPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tipo_refeicao} == "CAFE_MANHA" ? $F{tipo_refeicao} : "Café da Manhã"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["CAFE_MANHA".equals($F{tipo_refeicao}) ? " Café da Manhã" :
+"ALMOCO".equals($F{tipo_refeicao}) ? " Almoço" :
+"LANCHE".equals($F{tipo_refeicao}) ? " Lanche" :
+"CAFE_TARDE".equals($F{tipo_refeicao}) ? " Café da Tarde" :
+"JANTAR".equals($F{tipo_refeicao}) ? " Jantar" :
+"CEIA".equals($F{tipo_refeicao}) ? " Ceia" :
+" Desconhecido"
+]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="280" y="9" width="240" height="30" uuid="a6bfe6b2-d4c6-4f8d-960b-5e6da9ca0e87">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41a5d8e7-a82c-4b34-a80e-de67ba8214f5"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tipo de Refeição]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="41" y="9" width="240" height="30" uuid="090826c0-e0a8-4b4b-a435-0418f98c9dd7">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f0fd4700-b6c9-4b8d-9df8-1ba8202538b0"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Data de Registro]]></text>
-			</staticText>
 			<textField evaluationTime="Band" isBlankWhenNull="true" hyperlinkType="" hyperlinkTarget="">
-				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="41" y="99" width="479" height="50" isPrintWhenDetailOverflows="true" uuid="a2c5a047-8d60-42a6-a7ba-3e25d4d76b7f">
+				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="42" y="100" width="479" height="50" isPrintWhenDetailOverflows="true" uuid="a2c5a047-8d60-42a6-a7ba-3e25d4d76b7f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c4fdd38-eae1-4e0a-a19b-9d637f8106e4"/>
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement>
+				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{alimentos}]]></textFieldExpression>
@@ -251,22 +241,57 @@ ORDER BY r.data_registro DESC;]]>
 				</textElement>
 				<text><![CDATA[Alimentos]]></text>
 			</staticText>
-			<line>
-				<reportElement stretchType="ContainerBottom" x="30" y="167" width="500" height="1" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2a5e1b60-2cd6-40f2-8ec6-682cc08c69bb">
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-			</line>
 			<textField pattern="M/d/yy">
-				<reportElement x="41" y="39" width="239" height="30" uuid="88136cb3-879c-46ce-8a20-8833a03776aa">
+				<reportElement x="41" y="30" width="240" height="30" uuid="88136cb3-879c-46ce-8a20-8833a03776aa">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b1f2984-9db5-4161-a19a-8ccfb55da8cf"/>
 				</reportElement>
-				<textElement>
+				<box>
+					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<topPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm")
-    .format(java.sql.Timestamp.valueOf($F{data_registro}))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat(" dd/MM/yyyy HH:mm")
+    .format(java.sql.Timestamp.valueOf( $F{data_registro}))]]></textFieldExpression>
 			</textField>
+			<rectangle>
+				<reportElement x="41" y="0" width="479" height="30" backcolor="#D5D5D5" uuid="8a873b27-a0e3-4db4-aabd-60b9bc91da37"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Opaque" x="41" y="0" width="240" height="30" backcolor="rgba(252, 7, 3, 0.0)" uuid="a5a4b019-fe65-4757-b8d1-62f65c1f43b9"/>
+				<box>
+					<pen lineColor="#D2D2D2"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Data de Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="0" width="238" height="30" uuid="3875465f-c70b-4d66-a3be-05d7a06c7de9"/>
+				<box>
+					<pen lineColor="#D2D2D2"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Tipo de Refeição]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<pageFooter>

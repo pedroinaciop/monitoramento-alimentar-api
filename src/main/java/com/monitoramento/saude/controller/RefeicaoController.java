@@ -4,8 +4,8 @@ import com.monitoramento.saude.dto.RefeicaoRequestDTO;
 import com.monitoramento.saude.dto.RefeicaoResponseDTO;
 import com.monitoramento.saude.service.RefeicaoService;
 import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -42,7 +42,7 @@ public class RefeicaoController {
 
     @Transactional
     @DeleteMapping("/refeicao/{id}")
-    public void deleteRefeicao(@PathVariable("id") Long id) {
-        service.deleteRefeicao(id);
+    public ResponseEntity<String> deleteRefeicao(@PathVariable("id") Long id) {
+        return service.deleteRefeicao(id);
     }
 }

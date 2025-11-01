@@ -4,6 +4,7 @@ import com.monitoramento.saude.dto.InfoUserResponseDTO;
 import com.monitoramento.saude.model.InfoUsuario;
 import jakarta.transaction.Transactional;
 import com.monitoramento.saude.dto.InfoUserRequestDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.monitoramento.saude.service.InfoUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class InfoUsuarioController {
 
     @Transactional
     @DeleteMapping("/info/usuarios/{id}")
-    public void deleteInfoUser(@PathVariable("id") Long id) {
-        service.deleteInfoUser(id);
+    public ResponseEntity<String> deleteInfoUser(@PathVariable("id") Long id) {
+        return service.deleteInfoUser(id);
     }
 }
