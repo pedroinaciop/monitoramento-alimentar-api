@@ -6,12 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 @Entity(name = "medidas")
 public class Medidas {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,5 +78,125 @@ public class Medidas {
         altura = dados.altura();
         dataAlteracao = dados.dataAlteracao();
         this.usuario = dados.usuario();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(LocalDateTime dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public BigDecimal getPesoAtual() {
+        return pesoAtual;
+    }
+
+    public void setPesoAtual(BigDecimal pesoAtual) {
+        this.pesoAtual = pesoAtual;
+    }
+
+    public BigDecimal getPesoDesejado() {
+        return pesoDesejado;
+    }
+
+    public void setPesoDesejado(BigDecimal pesoDesejado) {
+        this.pesoDesejado = pesoDesejado;
+    }
+
+    public BigDecimal getMedidaCintura() {
+        return medidaCintura;
+    }
+
+    public void setMedidaCintura(BigDecimal medidaCintura) {
+        this.medidaCintura = medidaCintura;
+    }
+
+    public BigDecimal getMedidaQuadril() {
+        return medidaQuadril;
+    }
+
+    public void setMedidaQuadril(BigDecimal medidaQuadril) {
+        this.medidaQuadril = medidaQuadril;
+    }
+
+    public BigDecimal getMedidaTorax() {
+        return medidaTorax;
+    }
+
+    public void setMedidaTorax(BigDecimal medidaTorax) {
+        this.medidaTorax = medidaTorax;
+    }
+
+    public BigDecimal getMedidaBracoDireito() {
+        return medidaBracoDireito;
+    }
+
+    public void setMedidaBracoDireito(BigDecimal medidaBracoDireito) {
+        this.medidaBracoDireito = medidaBracoDireito;
+    }
+
+    public BigDecimal getMedidaBracoEsquerdo() {
+        return medidaBracoEsquerdo;
+    }
+
+    public void setMedidaBracoEsquerdo(BigDecimal medidaBracoEsquerdo) {
+        this.medidaBracoEsquerdo = medidaBracoEsquerdo;
+    }
+
+    public BigDecimal getMedidaCoxaDireita() {
+        return medidaCoxaDireita;
+    }
+
+    public void setMedidaCoxaDireita(BigDecimal medidaCoxaDireita) {
+        this.medidaCoxaDireita = medidaCoxaDireita;
+    }
+
+    public BigDecimal getMedidaCoxaEsquerda() {
+        return medidaCoxaEsquerda;
+    }
+
+    public void setMedidaCoxaEsquerda(BigDecimal medidaCoxaEsquerda) {
+        this.medidaCoxaEsquerda = medidaCoxaEsquerda;
+    }
+
+    public BigDecimal getMedidaPanturrilhaDireita() {
+        return medidaPanturrilhaDireita;
+    }
+
+    public void setMedidaPanturrilhaDireita(BigDecimal medidaPanturrilhaDireita) {
+        this.medidaPanturrilhaDireita = medidaPanturrilhaDireita;
+    }
+
+    public BigDecimal getMedidaPanturrilhaEsquerda() {
+        return medidaPanturrilhaEsquerda;
+    }
+
+    public void setMedidaPanturrilhaEsquerda(BigDecimal medidaPanturrilhaEsquerda) {
+        this.medidaPanturrilhaEsquerda = medidaPanturrilhaEsquerda;
+    }
+
+    public BigDecimal getAltura() {
+        return altura;
+    }
+
+    public void setAltura(BigDecimal altura) {
+        this.altura = altura;
+    }
+
+    public LocalDateTime getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 }
