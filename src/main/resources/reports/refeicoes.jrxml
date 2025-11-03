@@ -23,12 +23,12 @@
         CONCAT(a.nome_alimento, ' -  ', a.quantidade_alimento, ' ', a.unidade_alimento, ' ')
         SEPARATOR ', \n'
     ) AS alimentos
-FROM monitoramento_saude.usuario u
-INNER JOIN monitoramento_saude.info_usuario i
+FROM usuario u
+INNER JOIN info_usuario i
     ON i.usuario_id = u.id
-INNER JOIN monitoramento_saude.refeicao r
+INNER JOIN refeicao r
     ON r.usuario_id = u.id
-INNER JOIN monitoramento_saude.alimento a
+INNER JOIN alimento a
     ON a.refeicao_id = r.id
 WHERE u.id = $P{P_USUARIO_ID}
   AND r.data_registro BETWEEN $P{P_DATA_INICIAL} AND $P{P_DATA_FINAL}

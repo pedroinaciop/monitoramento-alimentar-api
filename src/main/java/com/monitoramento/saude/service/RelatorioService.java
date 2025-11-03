@@ -4,126 +4,125 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.util.JRLoader;
-
 import javax.sql.DataSource;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class RelatorioService {
-    public static final String ARQUIVO_JASPER_MEDIDAS = "reports/medidas.jasper";
-    public static final String ARQUIVO_JASPER_REFEICOES = "reports/refeicoes.jasper";
-    public static final String ARQUIVO_JRXML_MEDIDAS = "reports/medidas.jrxml";
-    public static final String ARQUIVO_JRXML_REFEICOES = "reports/refeicoes.jrxml";
-    
-    public static final Logger LOGGER = LoggerFactory.getLogger(RelatorioService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RelatorioService.class);
+
+    private static final String ARQUIVO_JASPER_MEDIDAS = "reports/medidas.jasper";
+    private static final String ARQUIVO_JASPER_REFEICOES = "reports/refeicoes.jasper";
+    private static final String ARQUIVO_JRXML_MEDIDAS = "reports/medidas.jrxml";
+    private static final String ARQUIVO_JRXML_REFEICOES = "reports/refeicoes.jrxml";
 
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
-
     public byte[] relatorioMedidasDownload(Long usuarioId, Date dataInicial, Date dataFinal) {
-        LOGGER.info("usuarioId={}, dataInicial={}, dataFinal={}", usuarioId, dataInicial, dataFinal);
-        Connection connection = null;
+        LOGGER.info("Iniciando relatório de medidas - usuarioId: {}, dataInicial: {}, dataFinal: {}",
+                usuarioId, dataInicial, dataFinal);
 
-        try {
-            Map<String, Object> params = new HashMap<>();
-            params.put("P_USUARIO_ID", usuarioId);
-            params.put("P_DATA_INICIAL", dataInicial);
-            params.put("P_DATA_FINAL", dataFinal);
-
-            // Tenta carregar o relatório compilado (.jasper) primeiro
-            JasperReport report = carregarRelatorioCompilado(ARQUIVO_JASPER_MEDIDAS, ARQUIVO_JRXML_MEDIDAS);
-            LOGGER.info("Relatório de medidas carregado com sucesso");
-
-            connection = dataSource.getConnection();
-            JasperPrint print = JasperFillManager.fillReport(report, params, connection);
-
-            return JasperExportManager.exportReportToPdf(print);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao gerar relatório de medidas: " + e.getMessage(), e);
-        } finally {
-            fecharConexao(connection);
-        }
+        return gerarRelatorio(ARQUIVO_JASPER_MEDIDAS, ARQUIVO_JRXML_MEDIDAS, usuarioId, dataInicial, dataFinal);
     }
 
     public byte[] relatorioRefeicoesDownload(Long usuarioId, Date dataInicial, Date dataFinal) {
-        LOGGER.info("usuarioId={}, dataInicial={}, dataFinal={}", usuarioId, dataInicial, dataFinal);
+        LOGGER.info("Iniciando relatório de refeições - usuarioId: {}, dataInicial: {}, dataFinal: {}",
+                usuarioId, dataInicial, dataFinal);
+
+        return gerarRelatorio(ARQUIVO_JASPER_REFEICOES, ARQUIVO_JRXML_REFEICOES, usuarioId, dataInicial, dataFinal);
+    }
+
+    private byte[] gerarRelatorio(String caminhoJasper, String caminhoJrxml, Long usuarioId, Date dataInicial, Date dataFinal) {
         Connection connection = null;
 
         try {
-            Map<String, Object> params = new HashMap<>();
-            params.put("P_USUARIO_ID", usuarioId);
-            params.put("P_DATA_INICIAL", dataInicial);
-            params.put("P_DATA_FINAL", dataFinal);
+            connection = testarConexao();
 
-            // Tenta carregar o relatório compilado (.jasper) primeiro
-            JasperReport report = carregarRelatorioCompilado(ARQUIVO_JASPER_REFEICOES, ARQUIVO_JRXML_REFEICOES);
-            LOGGER.info("Relatório de refeições carregado com sucesso");
+            Map<String, Object> params = prepararParametros(usuarioId, dataInicial, dataFinal);
 
-            connection = dataSource.getConnection();
+            JasperReport report = carregarRelatorioCompilado(caminhoJasper, caminhoJrxml);
+            LOGGER.info("Relatório carregado com sucesso: {}", caminhoJasper);
+
             JasperPrint print = JasperFillManager.fillReport(report, params, connection);
+            LOGGER.info("Relatório preenchido com sucesso, exportando para PDF...");
 
             return JasperExportManager.exportReportToPdf(print);
 
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao gerar relatório de refeições: " + e.getMessage(), e);
+            LOGGER.error("ERRO ao gerar relatório: {}", e.getMessage(), e);
+            throw new RuntimeException("Erro ao gerar relatório: " + e.getMessage(), e);
         } finally {
             fecharConexao(connection);
         }
     }
 
-    /**
-     * Tenta carregar o relatório compilado (.jasper) primeiro.
-     * Se não encontrar, compila a partir do .jrxml
-     */
-    private JasperReport carregarRelatorioCompilado(String caminhoJasper, String caminhoJrxml) {
-        try {
-            // Primeiro tenta carregar o .jasper (pré-compilado)
-            Resource resource = resourceLoader.getResource("classpath:" + caminhoJasper);
-            if (resource.exists()) {
-                try (InputStream inputStream = resource.getInputStream()) {
-                    return (JasperReport) JRLoader.loadObject(inputStream);
-                }
-            } else {
-                LOGGER.warn("Arquivo .jasper não encontrado, compilando a partir do .jrxml: {}", caminhoJasper);
-                // Se não encontrar o .jasper, compila do .jrxml
-                return compilarDoJrxml(caminhoJrxml);
-            }
-        } catch (Exception e) {
-            LOGGER.warn("Erro ao carregar .jasper, tentando compilar do .jrxml: {}", e.getMessage());
-            return compilarDoJrxml(caminhoJrxml);
+    private Connection testarConexao() throws SQLException {
+        Connection connection = dataSource.getConnection();
+
+        if (connection.isValid(2)) {
+            LOGGER.info("Conexão com banco de dados estabelecida com sucesso");
+            return connection;
+        } else {
+            throw new SQLException("Conexão com banco de dados inválida");
         }
     }
 
-    /**
-     * Compila o relatório a partir do arquivo .jrxml
-     */
-    private JasperReport compilarDoJrxml(String caminhoJrxml) {
-        try (InputStream inputStream = new ClassPathResource(caminhoJrxml).getInputStream()) {
-            return JasperCompileManager.compileReport(inputStream);
+    private Map<String, Object> prepararParametros(Long usuarioId, Date dataInicial, Date dataFinal) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("P_USUARIO_ID", usuarioId);
+        params.put("P_DATA_INICIAL", dataInicial);
+        params.put("P_DATA_FINAL", dataFinal);
+
+        LOGGER.debug("Parâmetros do relatório: usuarioId={}, dataInicial={}, dataFinal={}",
+                usuarioId, dataInicial, dataFinal);
+
+        return params;
+    }
+
+    private JasperReport carregarRelatorioCompilado(String caminhoJasper, String caminhoJrxml) {
+        try {
+            InputStream jasperStream = new ClassPathResource(caminhoJasper).getInputStream();
+            if (jasperStream != null) {
+                JasperReport report = (JasperReport) JRLoader.loadObject(jasperStream);
+                jasperStream.close();
+                LOGGER.info("Relatório compilado carregado: {}", caminhoJasper);
+                return report;
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Erro ao compilar relatório do arquivo: " + caminhoJrxml, e);
+            LOGGER.warn("Não foi possível carregar .jasper, compilando do .jrxml: {}", e.getMessage());
+        }
+        return compilarDoJrxml(caminhoJrxml);
+    }
+
+    private JasperReport compilarDoJrxml(String caminhoJrxml) {
+        try (InputStream jrxmlStream = new ClassPathResource(caminhoJrxml).getInputStream()) {
+            JasperReport report = JasperCompileManager.compileReport(jrxmlStream);
+            LOGGER.info("Relatório compilado com sucesso do .jrxml: {}", caminhoJrxml);
+            return report;
+        } catch (Exception e) {
+            LOGGER.error("ERRO ao compilar relatório: {}", caminhoJrxml, e);
+            throw new RuntimeException("Erro ao compilar relatório: " + caminhoJrxml, e);
         }
     }
 
     private void fecharConexao(Connection connection) {
         if (connection != null) {
             try {
-                connection.close();
-            } catch (Exception e) {
-                LOGGER.warn("Erro ao fechar conexão: {}", e.getMessage());
+                if (!connection.isClosed()) {
+                    connection.close();
+                    LOGGER.debug("Conexão fechada com sucesso");
+                }
+            } catch (SQLException e) {
+                LOGGER.warn("Aviso ao fechar conexão: {}", e.getMessage());
             }
         }
     }

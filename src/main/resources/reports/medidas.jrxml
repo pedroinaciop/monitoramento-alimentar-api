@@ -30,10 +30,10 @@
     m.medida_coxa_esquerda,
     m.medida_panturrilha_direita,
     m.medida_panturrilha_esquerda
-FROM monitoramento_saude.usuario u
-INNER JOIN monitoramento_saude.info_usuario i 
+FROM usuario u
+INNER JOIN info_usuario i
     ON i.usuario_id = u.id
-INNER JOIN monitoramento_saude.medidas m 
+INNER JOIN medidas m
     ON m.usuario_id = u.id
 WHERE u.id = $P{P_USUARIO_ID}
   AND m.data_registro BETWEEN $P{P_DATA_INICIAL} AND $P{P_DATA_FINAL}
