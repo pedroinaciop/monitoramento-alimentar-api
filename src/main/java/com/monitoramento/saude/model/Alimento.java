@@ -1,14 +1,10 @@
 package com.monitoramento.saude.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import com.monitoramento.saude.enums.UnidadeAlimento;
 
-@Setter
-@Getter
 @Entity(name = "alimento")
 public class Alimento {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +30,42 @@ public class Alimento {
         this.nomeAlimento = nomeAlimento;
         this.unidadeAlimento = unidadeAlimento;
         this.quantidadeAlimento = quantidadeAlimento;
+        this.refeicao = refeicao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNomeAlimento() {
+        return nomeAlimento;
+    }
+
+    public void setNomeAlimento(String nomeAlimento) {
+        this.nomeAlimento = nomeAlimento;
+    }
+
+    public UnidadeAlimento getUnidadeAlimento() {
+        return unidadeAlimento;
+    }
+
+    public void setUnidadeAlimento(UnidadeAlimento unidadeAlimento) {
+        this.unidadeAlimento = unidadeAlimento;
+    }
+
+    public BigDecimal getQuantidadeAlimento() {
+        return quantidadeAlimento;
+    }
+
+    public void setQuantidadeAlimento(BigDecimal quantidadeAlimento) {
+        this.quantidadeAlimento = quantidadeAlimento;
+    }
+
+    public Refeicao getRefeicao() {
+        return refeicao;
+    }
+
+    public void setRefeicao(Refeicao refeicao) {
         this.refeicao = refeicao;
     }
 }

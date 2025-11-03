@@ -29,6 +29,8 @@ public record InfoUserRequestDTO(
 
         String doencasPreExistentes,
 
+        String caracteristicaAlimentar,
+
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
         LocalDateTime dataAlteracao,
 

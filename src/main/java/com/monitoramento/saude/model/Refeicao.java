@@ -6,15 +6,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.monitoramento.saude.dto.RefeicaoResponseDTO;
 import com.monitoramento.saude.enums.TipoRefeicao;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
 @Entity(name = "refeicao")
 public class Refeicao {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,5 +55,49 @@ public class Refeicao {
         usuario = dados.usuario();
         alimentos = dados.alimentos();
         dataAlteracao = dados.dataAlteracao();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(LocalDateTime dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public TipoRefeicao getTipoRefeicao() {
+        return tipoRefeicao;
+    }
+
+    public void setTipoRefeicao(TipoRefeicao tipoRefeicao) {
+        this.tipoRefeicao = tipoRefeicao;
+    }
+
+    public LocalDateTime getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Alimento> getAlimentos() {
+        return alimentos;
+    }
+
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
+    }
+
+    public void setAlimentos(List<Alimento> alimentos) {
+        this.alimentos = alimentos;
     }
 }

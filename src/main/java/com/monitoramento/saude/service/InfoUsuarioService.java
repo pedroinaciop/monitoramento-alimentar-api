@@ -55,6 +55,7 @@ public class InfoUsuarioService {
         infoUsuario.setIntolerancias(dados.intolerancias());
         infoUsuario.setDoencasPreExistentes(dados.doencasPreExistentes());
         infoUsuario.setDataAlteracao(dados.dataAlteracao());
+        infoUsuario.setCaracteristicaAlimentar(dados.caracteristicaAlimentar());
 
         InfoUsuario infoUsuarioAtualizado =  repository.save(infoUsuario);
         return objectMapper.convertValue(infoUsuarioAtualizado, InfoUserResponseDTO.class);

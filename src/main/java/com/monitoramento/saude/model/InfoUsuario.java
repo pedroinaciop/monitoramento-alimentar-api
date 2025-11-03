@@ -42,6 +42,9 @@ public class InfoUsuario {
     @Column(length = 500)
     private String doencasPreExistentes;
 
+    @Column(length = 50)
+    private String caracteristicaAlimentar;
+
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
     private LocalDateTime dataAlteracao;
 
@@ -55,7 +58,7 @@ public class InfoUsuario {
 
     public InfoUsuario() {}
 
-    public InfoUsuario(Long id, LocalDateTime dataRegistro, LocalDate dataNascimento, Integer idade, Sexo sexoBiologico, NivelAtividadeFisica nivelAtividadeFisica, String objetivo, String alergias, String intolerancias, String doencasPreExistentes, LocalDateTime dataAlteracao, Usuario usuario) {
+    public InfoUsuario(Long id, LocalDateTime dataRegistro, LocalDate dataNascimento, Integer idade, Sexo sexoBiologico, NivelAtividadeFisica nivelAtividadeFisica, String objetivo, String alergias, String intolerancias, String doencasPreExistentes, String caracteristicaAlimentar, LocalDateTime dataAlteracao, Usuario usuario) {
         this.id = id;
         this.dataRegistro = dataRegistro;
         this.dataNascimento = dataNascimento;
@@ -68,6 +71,7 @@ public class InfoUsuario {
         this.doencasPreExistentes = doencasPreExistentes;
         this.dataAlteracao = dataAlteracao;
         this.usuario = usuario;
+        this.caracteristicaAlimentar = caracteristicaAlimentar;
     }
 
     public InfoUsuario(InfoUserRequestDTO dados) {
@@ -81,5 +85,50 @@ public class InfoUsuario {
         intolerancias = dados.intolerancias();
         doencasPreExistentes = dados.doencasPreExistentes();
         usuario = dados.usuario();
+        caracteristicaAlimentar = dados.caracteristicaAlimentar();
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public void setSexoBiologico(Sexo sexoBiologico) {
+        this.sexoBiologico = sexoBiologico;
+    }
+
+    public void setNivelAtividadeFisica(NivelAtividadeFisica nivelAtividadeFisica) {
+        this.nivelAtividadeFisica = nivelAtividadeFisica;
+    }
+
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public void setAlergias(String alergias) {
+        this.alergias = alergias;
+    }
+
+    public void setIntolerancias(String intolerancias) {
+        this.intolerancias = intolerancias;
+    }
+
+    public void setDoencasPreExistentes(String doencasPreExistentes) {
+        this.doencasPreExistentes = doencasPreExistentes;
+    }
+
+    public void setCaracteristicaAlimentar(String caracteristicaAlimentar) {
+        this.caracteristicaAlimentar = caracteristicaAlimentar;
+    }
+
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

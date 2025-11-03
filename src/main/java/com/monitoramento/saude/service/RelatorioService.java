@@ -92,4 +92,5 @@ public class RelatorioService {
             throw new RuntimeException("Arquivo JRXML não encontrado: " + file, e);
         }
     }
+
 }
