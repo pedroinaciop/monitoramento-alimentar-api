@@ -58,8 +58,8 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:3000/",
-                "http://localhost:3001/",
-                "https://adminpainel.store/"));
+                "https://adminpainel.store/",
+                "https://tcc-front-end-eight.vercel.app/"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
