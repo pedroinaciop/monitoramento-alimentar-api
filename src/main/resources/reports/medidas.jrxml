@@ -169,13 +169,15 @@ ORDER BY m.data_registro DESC]]>
 			<staticText>
 				<reportElement x="261" y="86" width="78" height="20" uuid="22fa7907-d343-4c5a-bd50-e52a3e471ee1"/>
 				<textElement verticalAlignment="Bottom">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Período Inicial:]]></text>
 			</staticText>
 			<textField evaluationTime="Page" pattern="dd/MM/yyyy">
 				<reportElement x="340" y="86" width="60" height="20" uuid="b8d8d817-bac8-4cc3-880d-011e11e0ff5d"/>
-				<textElement verticalAlignment="Bottom"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{P_DATA_INICIAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -183,13 +185,15 @@ ORDER BY m.data_registro DESC]]>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Bottom">
-					<font isBold="true"/>
+					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Período Final:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="470" y="86" width="60" height="20" uuid="d5f46396-56c2-4762-8e48-e64a34ad9431"/>
-				<textElement verticalAlignment="Bottom"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{P_DATA_FINAL}]]></textFieldExpression>
 			</textField>
 		</band>
