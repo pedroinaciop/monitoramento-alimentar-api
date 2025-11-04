@@ -37,8 +37,7 @@ INNER JOIN medidas m
     ON m.usuario_id = u.id
 WHERE u.id = $P{P_USUARIO_ID}
   AND m.data_registro BETWEEN $P{P_DATA_INICIAL} AND $P{P_DATA_FINAL}
-ORDER BY m.data_registro DESC
-]]>
+ORDER BY m.data_registro DESC]]>
 	</queryString>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -226,7 +225,7 @@ ORDER BY m.data_registro DESC
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $F{idade}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{idade}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="250" y="1" width="100" height="30" uuid="a73bbadd-4941-4650-9130-560df8865997"/>
@@ -240,7 +239,7 @@ ORDER BY m.data_registro DESC
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $F{sexo_biologico}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sexo_biologico}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="350" y="1" width="170" height="30" uuid="0fa43890-a7e9-405d-b77b-c6223dfc80dc"/>
@@ -254,7 +253,7 @@ ORDER BY m.data_registro DESC
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $F{email}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
@@ -875,7 +874,7 @@ ORDER BY m.data_registro DESC
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[ $F{data_registro}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{data_registro}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="41" y="-14" width="159" height="30" uuid="6197e1ce-1633-4e40-b650-b3d9cc13dad4"/>
