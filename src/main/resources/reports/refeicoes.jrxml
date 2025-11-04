@@ -216,8 +216,7 @@ ORDER BY r.data_registro DESC;]]>
 "CAFE_TARDE".equals($F{tipo_refeicao}) ? " Café da Tarde" :
 "JANTAR".equals($F{tipo_refeicao}) ? " Jantar" :
 "CEIA".equals($F{tipo_refeicao}) ? " Ceia" :
-" Desconhecido"
-]]></textFieldExpression>
+" Desconhecido"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Band" isBlankWhenNull="true" hyperlinkType="" hyperlinkTarget="">
 				<reportElement positionType="Float" stretchType="ElementGroupHeight" x="42" y="100" width="479" height="50" isPrintWhenDetailOverflows="true" uuid="a2c5a047-8d60-42a6-a7ba-3e25d4d76b7f">
