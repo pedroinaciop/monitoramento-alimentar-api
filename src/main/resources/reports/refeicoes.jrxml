@@ -94,7 +94,7 @@ ORDER BY r.data_registro DESC;]]>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<image>
 				<reportElement x="40" y="23" width="168" height="105" uuid="eabf7871-114b-45bf-904e-c122f0c8172e"/>
-				<imageExpression><![CDATA["C:/Users/pedro/Documents/GitHub/Tarefas/logo_750.png"]]></imageExpression>
+				<imageExpression><![CDATA["https://raw.githubusercontent.com/pedroinaciop/tcc_BackEnd/refs/heads/main/src/main/resources/images/logo_750.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="290" y="60" width="200" height="20" uuid="2155d662-f7ad-4aca-8193-126177dfbea0"/>
