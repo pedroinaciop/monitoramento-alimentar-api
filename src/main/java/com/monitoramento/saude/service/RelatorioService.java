@@ -52,6 +52,7 @@ public class RelatorioService {
     }
 
     private byte[] gerarRelatorio(String caminhoJasper, String caminhoJrxml, Long usuarioId, Date dataInicial, Date dataFinal) {
+        configurarJasperParaRailway();
         Connection connection = null;
 
         LOGGER.info("Tentando gerar relatório: {}", caminhoJasper);
@@ -204,6 +205,21 @@ public class RelatorioService {
             } catch (SQLException e) {
                 LOGGER.warn("⚠️ Aviso ao fechar conexão: {}", e.getMessage());
             }
+        }
+    }
+
+    private void configurarJasperParaRailway() {
+        try {
+            System.setProperty("java.awt.headless", "true");
+
+            JasperReportsContext context = DefaultJasperReportsContext.getInstance();
+            context.setProperty("net.sf.jasperreports.awt.ignore.missing.font", "true");
+            context.setProperty("net.sf.jasperreports.default.font.name", "DejaVu Sans");
+            context.setProperty("net.sf.jasperreports.default.pdf.font.name", "Helvetica");
+
+            LOGGER.info("✅ JasperReports configurado para ambiente Railway");
+        } catch (Exception e) {
+            LOGGER.warn("⚠️ Configuração JasperReports: {}", e.getMessage());
         }
     }
 }
