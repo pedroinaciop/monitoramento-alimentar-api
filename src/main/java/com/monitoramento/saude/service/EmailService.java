@@ -1,6 +1,6 @@
 package com.monitoramento.saude.service;
 
-import com.monitoramento.saude.dto.Email;
+import com.monitoramento.saude.dto.EmailDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.core.io.ByteArrayResource;
@@ -19,7 +19,7 @@ public class EmailService {
         this.relatorioService = relatorioService;
     }
 
-    public ResponseEntity<String> sendMailRelatorioMedidas(Email dados) throws MessagingException {
+    public ResponseEntity<String> sendMailRelatorioMedidas(EmailDTO dados) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
@@ -38,7 +38,7 @@ public class EmailService {
         return ResponseEntity.ok("E-mail enviado com sucesso");
     }
 
-    public ResponseEntity<String> sendMailRelatorioRefeicoes(Email dados) throws MessagingException {
+    public ResponseEntity<String> sendMailRelatorioRefeicoes(EmailDTO dados) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 

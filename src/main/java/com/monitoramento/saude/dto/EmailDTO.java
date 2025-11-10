@@ -3,7 +3,7 @@ package com.monitoramento.saude.dto;
 
 import java.sql.Date;
 
-public record Email(
+public record EmailDTO(
         String to,
         String subject,
         String body,

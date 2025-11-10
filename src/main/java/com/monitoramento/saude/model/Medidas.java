@@ -3,8 +3,11 @@ package com.monitoramento.saude.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.monitoramento.saude.dto.MedidasRequestDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
 @Entity(name = "medidas")
@@ -16,19 +19,25 @@ public class Medidas {
     private LocalDateTime dataRegistro;
 
     private BigDecimal pesoAtual;
+
     private BigDecimal pesoDesejado;
 
     private BigDecimal medidaCintura;
+
     private BigDecimal medidaQuadril;
+
     private BigDecimal medidaTorax;
 
     private BigDecimal medidaBracoDireito;
+
     private BigDecimal medidaBracoEsquerdo;
 
     private BigDecimal medidaCoxaDireita;
+
     private BigDecimal medidaCoxaEsquerda;
 
     private BigDecimal medidaPanturrilhaDireita;
+
     private BigDecimal medidaPanturrilhaEsquerda;
 
     private BigDecimal altura;
@@ -82,6 +91,10 @@ public class Medidas {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getDataRegistro() {
@@ -198,5 +211,9 @@ public class Medidas {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

@@ -1,6 +1,6 @@
 package com.monitoramento.saude.controller;
 
-import com.monitoramento.saude.dto.Email;
+import com.monitoramento.saude.dto.EmailDTO;
 import com.monitoramento.saude.service.EmailService;
 import jakarta.mail.MessagingException;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +19,12 @@ public class EmailController {
     }
 
     @PostMapping("/medidas")
-    public ResponseEntity<String> sendMailRelatorioMedidas(@RequestBody Email dados) throws MessagingException {
+    public ResponseEntity<String> sendMailRelatorioMedidas(@RequestBody EmailDTO dados) throws MessagingException {
         return emailService.sendMailRelatorioMedidas(dados);
     }
 
     @PostMapping("/refeicoes")
-    public ResponseEntity<String> sendMailRelatorioRefeicoes(@RequestBody Email dados) throws MessagingException {
+    public ResponseEntity<String> sendMailRelatorioRefeicoes(@RequestBody EmailDTO dados) throws MessagingException {
         return emailService.sendMailRelatorioRefeicoes(dados);
     }
 }

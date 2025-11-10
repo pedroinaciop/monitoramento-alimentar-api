@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -75,4 +77,15 @@ public class MedidasService {
         Medidas medidaAtualizada = repository.save(medida);
         return objectMapper.convertValue(medidaAtualizada, MedidasResponseDTO.class);
     }
+
+    public BigDecimal calculaIMC(Long usuarioId) {
+        return repository.findFirstByUsuarioIdOrderByDataRegistroDesc(usuarioId)
+                .map(medidas -> {
+                    BigDecimal peso = medidas.getPesoAtual();
+                    BigDecimal altura = medidas.getAltura();
+                    return peso.divide(altura.multiply(altura),2, RoundingMode.HALF_UP);
+                })
+                .orElse(BigDecimal.ZERO);
+    }
+
 }
