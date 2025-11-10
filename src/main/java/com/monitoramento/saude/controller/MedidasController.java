@@ -1,6 +1,8 @@
 package com.monitoramento.saude.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,11 @@ public class MedidasController {
     @GetMapping("/medidas/{id}")
     public List<MedidasResponseDTO> findAllMedidasByUsuarioId(@PathVariable("id") Long id) {
         return service.findAllMedidasByUsuarioId(id);
+    }
+
+    @GetMapping("/medidas/imc/{id}")
+    public BigDecimal getIMC(@PathVariable("id") Long id) {
+        return service.calculaIMC(id);
     }
 
     @Transactional
