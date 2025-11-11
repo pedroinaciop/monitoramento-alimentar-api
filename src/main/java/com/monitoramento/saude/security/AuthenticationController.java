@@ -29,7 +29,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationDTO data) {
         if (this.usuarioRepository.findByEmail(data.login()) == null) {
-            return ResponseEntity.status(404).body("Acesso negado, usuário ou senha incorreto!");
+            return ResponseEntity.status(404).body("Acesso negado, usuário ou senha incorretos!");
         }
 
         try {
