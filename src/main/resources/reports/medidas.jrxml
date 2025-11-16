@@ -160,39 +160,46 @@ ORDER BY m.data_registro DESC]]>
 				<imageExpression><![CDATA["https://raw.githubusercontent.com/pedroinaciop/tcc_BackEnd/refs/heads/main/src/main/resources/images/logo_750.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="290" y="60" width="200" height="20" uuid="449471d5-f384-4f89-9cb9-8fe4089693cd"/>
-				<textElement>
-					<font fontName="Arial" size="16" isBold="true"/>
+				<reportElement x="240" y="62" width="284" height="24" uuid="449471d5-f384-4f89-9cb9-8fe4089693cd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RELATÓRIO DE MEDIDAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="261" y="86" width="78" height="20" uuid="22fa7907-d343-4c5a-bd50-e52a3e471ee1"/>
+				<reportElement x="240" y="86" width="78" height="20" uuid="22fa7907-d343-4c5a-bd50-e52a3e471ee1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Período Inicial:]]></text>
 			</staticText>
 			<textField evaluationTime="Page" pattern="dd/MM/yyyy">
-				<reportElement x="340" y="86" width="60" height="20" uuid="b8d8d817-bac8-4cc3-880d-011e11e0ff5d"/>
+				<reportElement x="318" y="86" width="64" height="20" uuid="b8d8d817-bac8-4cc3-880d-011e11e0ff5d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
-					<font fontName="Arial"/>
+					<font fontName="SansSerif"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{P_DATA_INICIAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="400" y="86" width="70" height="20" uuid="f6b20add-10ae-4304-90bf-20b52fe9705c">
+				<reportElement x="382" y="86" width="78" height="20" uuid="f6b20add-10ae-4304-90bf-20b52fe9705c">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" isBold="true"/>
+					<font fontName="SansSerif" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Período Final:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="470" y="86" width="60" height="20" uuid="d5f46396-56c2-4762-8e48-e64a34ad9431"/>
+				<reportElement x="460" y="86" width="64" height="20" uuid="d5f46396-56c2-4762-8e48-e64a34ad9431"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
-					<font fontName="Arial"/>
+					<font fontName="SansSerif"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{P_DATA_FINAL}]]></textFieldExpression>
 			</textField>
@@ -204,7 +211,7 @@ ORDER BY m.data_registro DESC]]>
 			<staticText>
 				<reportElement x="41" y="1" width="139" height="30" uuid="4841b63a-ffef-4ef2-a0b1-a693a3df2665"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif[" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
@@ -213,49 +220,49 @@ ORDER BY m.data_registro DESC]]>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome_completo}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="180" y="1" width="70" height="30" uuid="ba8e0d70-7bb9-41ff-a254-5045b1aac261"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Idade]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="180" y="31" width="70" height="30" uuid="7abc2d13-fad5-4b07-9b1b-96dacd226c3c"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{idade}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="250" y="1" width="100" height="30" uuid="a73bbadd-4941-4650-9130-560df8865997"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Gênero]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="250" y="31" width="100" height="30" uuid="544d8511-5014-4df9-aaeb-be306f2e38ce"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sexo_biologico}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="350" y="1" width="170" height="30" uuid="0fa43890-a7e9-405d-b77b-c6223dfc80dc"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[E-mail]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="350" y="31" width="170" height="30" uuid="4a2f8cde-03c6-4a63-a24e-bb88522bb533"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
@@ -271,30 +278,16 @@ ORDER BY m.data_registro DESC]]>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement mode="Opaque" x="41" y="16" width="159" height="30" backcolor="rgba(252, 7, 3, 0.0)" uuid="c1425420-d7e5-43f0-8d3d-7b80c653edef"/>
-				<box>
-					<pen lineColor="#D2D2D2"/>
-					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ Campo]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="200" y="16" width="150" height="30" uuid="24816621-97ff-4021-a4c3-187a9acc798b"/>
 				<box>
-					<pen lineColor="#D2D2D2"/>
-					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<topPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Valor]]></text>
 			</staticText>
@@ -304,7 +297,7 @@ ORDER BY m.data_registro DESC]]>
 					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Altura]]></text>
 			</staticText>
@@ -318,21 +311,21 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Metros]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="350" y="16" width="170" height="30" uuid="60689a91-db67-4c7b-94a0-b1769ccec8aa"/>
 				<box>
-					<pen lineColor="#D2D2D2"/>
-					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
-					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#D2D2D2"/>
+					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<topPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Unidade]]></text>
 			</staticText>
@@ -348,7 +341,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{altura}]]></textFieldExpression>
 			</textField>
@@ -362,7 +355,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Peso Atual]]></text>
 			</staticText>
@@ -376,7 +369,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Peso Desejado]]></text>
 			</staticText>
@@ -390,7 +383,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Medida da Cintura]]></text>
 			</staticText>
@@ -404,7 +397,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Medida do Quadril]]></text>
 			</staticText>
@@ -418,7 +411,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Medida do Tórax]]></text>
 			</staticText>
@@ -432,7 +425,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Braço Direito]]></text>
 			</staticText>
@@ -446,7 +439,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Braço Esquerdo]]></text>
 			</staticText>
@@ -460,7 +453,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Coxa Direita]]></text>
 			</staticText>
@@ -474,7 +467,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Coxa Esquerda]]></text>
 			</staticText>
@@ -488,7 +481,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Panturrilha Direita]]></text>
 			</staticText>
@@ -502,7 +495,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Panturrilha Esquerda]]></text>
 			</staticText>
@@ -518,7 +511,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{peso_atual}]]></textFieldExpression>
 			</textField>
@@ -534,7 +527,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{peso_desejado}]]></textFieldExpression>
 			</textField>
@@ -550,7 +543,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_cintura}]]></textFieldExpression>
 			</textField>
@@ -566,7 +559,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_quadril}]]></textFieldExpression>
 			</textField>
@@ -582,7 +575,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_torax}]]></textFieldExpression>
 			</textField>
@@ -598,7 +591,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_braco_direito}]]></textFieldExpression>
 			</textField>
@@ -614,7 +607,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_braco_esquerdo}]]></textFieldExpression>
 			</textField>
@@ -630,7 +623,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_coxa_direita}]]></textFieldExpression>
 			</textField>
@@ -646,7 +639,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_coxa_esquerda}]]></textFieldExpression>
 			</textField>
@@ -662,7 +655,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_panturrilha_direita}]]></textFieldExpression>
 			</textField>
@@ -678,7 +671,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medida_panturrilha_esquerda}]]></textFieldExpression>
 			</textField>
@@ -692,7 +685,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Quilos]]></text>
 			</staticText>
@@ -706,7 +699,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Quilos]]></text>
 			</staticText>
@@ -720,7 +713,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -734,7 +727,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -748,7 +741,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -762,7 +755,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -776,7 +769,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -790,7 +783,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -804,7 +797,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -818,7 +811,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -832,7 +825,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<text><![CDATA[ Centímetros]]></text>
 			</staticText>
@@ -846,7 +839,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Membros Superiores]]></text>
 			</staticText>
@@ -860,7 +853,7 @@ ORDER BY m.data_registro DESC]]>
 					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
 				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Membros Inferiores]]></text>
 			</staticText>
@@ -868,42 +861,46 @@ ORDER BY m.data_registro DESC]]>
 				<reportElement x="200" y="-14" width="320" height="30" uuid="87f476c9-3c1f-4de2-ab39-8a45c11465aa">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82bc4314-087d-4772-b031-1721a1538c1a"/>
 				</reportElement>
-				<box>
-					<pen lineWidth="0.0" lineColor="#D2D2D2"/>
-					<topPen lineWidth="0.0" lineColor="#D2D2D2"/>
-					<leftPen lineWidth="0.0" lineColor="#D2D2D2"/>
-					<bottomPen lineWidth="0.0" lineColor="#D2D2D2"/>
-					<rightPen lineWidth="0.0" lineColor="#D2D2D2"/>
-				</box>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif[" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{data_registro}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="41" y="-14" width="159" height="30" uuid="6197e1ce-1633-4e40-b650-b3d9cc13dad4"/>
-				<box>
-					<pen lineWidth="0.0" lineColor="#D2D2D2"/>
-				</box>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif[" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Data de Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="16" width="159" height="30" uuid="ddefc220-898f-4c90-8470-eaf9f0cbd6d3"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<topPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Campo]]></text>
 			</staticText>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="65" splitType="Stretch">
-			<textField pattern="dd/MM/yyyy hh:mm">
-				<reportElement x="41" y="20" width="100" height="30" uuid="7ccc54b2-7442-47a3-b45a-2700322e53a1"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
+			<textField pattern="dd/MM/yyyy hh:mm:ss a">
+				<reportElement x="41" y="20" width="139" height="30" uuid="7ccc54b2-7442-47a3-b45a-2700322e53a1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="490" y="20" width="28" height="30" uuid="f43f3f2c-24f2-41a4-8c6c-a859fea4e83f"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -912,8 +909,15 @@ ORDER BY m.data_registro DESC]]>
 		<band height="50">
 			<staticText>
 				<reportElement x="205" y="10" width="150" height="30" uuid="cbf6798d-4fb6-406e-a28c-85602196e654"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<topPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
+				</box>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nenhum dado encontrado]]></text>
 			</staticText>
