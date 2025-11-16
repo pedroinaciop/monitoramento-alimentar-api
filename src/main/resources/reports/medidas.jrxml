@@ -156,11 +156,11 @@ ORDER BY m.data_registro DESC]]>
 		<band height="150">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<image>
-				<reportElement x="40" y="23" width="168" height="105" uuid="5e2b6079-eb02-4453-977e-473686ee53f8"/>
+				<reportElement x="40" y="23" width="110" height="105" uuid="5e2b6079-eb02-4453-977e-473686ee53f8"/>
 				<imageExpression><![CDATA["https://raw.githubusercontent.com/pedroinaciop/tcc_BackEnd/refs/heads/main/src/main/resources/images/logo_750.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="240" y="62" width="284" height="24" uuid="449471d5-f384-4f89-9cb9-8fe4089693cd">
+				<reportElement x="220" y="62" width="304" height="24" uuid="449471d5-f384-4f89-9cb9-8fe4089693cd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -169,7 +169,7 @@ ORDER BY m.data_registro DESC]]>
 				<text><![CDATA[RELATÓRIO DE MEDIDAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="240" y="86" width="78" height="20" uuid="22fa7907-d343-4c5a-bd50-e52a3e471ee1">
+				<reportElement x="220" y="86" width="88" height="20" uuid="22fa7907-d343-4c5a-bd50-e52a3e471ee1">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Bottom">
@@ -178,7 +178,7 @@ ORDER BY m.data_registro DESC]]>
 				<text><![CDATA[Período Inicial:]]></text>
 			</staticText>
 			<textField evaluationTime="Page" pattern="dd/MM/yyyy">
-				<reportElement x="318" y="86" width="64" height="20" uuid="b8d8d817-bac8-4cc3-880d-011e11e0ff5d">
+				<reportElement x="308" y="86" width="64" height="20" uuid="b8d8d817-bac8-4cc3-880d-011e11e0ff5d">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
@@ -187,7 +187,7 @@ ORDER BY m.data_registro DESC]]>
 				<textFieldExpression><![CDATA[$P{P_DATA_INICIAL}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="382" y="86" width="78" height="20" uuid="f6b20add-10ae-4304-90bf-20b52fe9705c">
+				<reportElement x="372" y="86" width="88" height="20" uuid="f6b20add-10ae-4304-90bf-20b52fe9705c">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -211,7 +211,7 @@ ORDER BY m.data_registro DESC]]>
 			<staticText>
 				<reportElement x="41" y="1" width="139" height="30" uuid="4841b63a-ffef-4ef2-a0b1-a693a3df2665"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif[" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
@@ -862,14 +862,14 @@ ORDER BY m.data_registro DESC]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82bc4314-087d-4772-b031-1721a1538c1a"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font fontName="SansSerif[" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{data_registro}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="41" y="-14" width="159" height="30" uuid="6197e1ce-1633-4e40-b650-b3d9cc13dad4"/>
 				<textElement verticalAlignment="Bottom">
-					<font fontName="SansSerif[" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Data de Registro]]></text>
 			</staticText>
@@ -892,15 +892,21 @@ ORDER BY m.data_registro DESC]]>
 	<pageFooter>
 		<band height="65" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy hh:mm:ss a">
-				<reportElement x="41" y="20" width="139" height="30" uuid="7ccc54b2-7442-47a3-b45a-2700322e53a1"/>
+				<reportElement x="41" y="20" width="140" height="30" uuid="7ccc54b2-7442-47a3-b45a-2700322e53a1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="490" y="20" width="28" height="30" uuid="f43f3f2c-24f2-41a4-8c6c-a859fea4e83f"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<reportElement x="490" y="20" width="30" height="30" uuid="f43f3f2c-24f2-41a4-8c6c-a859fea4e83f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
