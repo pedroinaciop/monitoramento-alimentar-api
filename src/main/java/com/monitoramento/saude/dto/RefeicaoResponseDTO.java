@@ -10,7 +10,7 @@ import java.util.List;
 public record RefeicaoResponseDTO (
         Long id,
 
-        @JsonFormat(pattern = "dd/MM/yyyy HH:mm", timezone = "America/Sao_Paulo")
+        @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Sao_Paulo")
         LocalDateTime dataRegistro,
 
         TipoRefeicao tipoRefeicao,
