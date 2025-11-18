@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.monitoramento.saude.dto.MedidasRequestDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
