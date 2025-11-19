@@ -109,57 +109,32 @@ npm start
 
 ---
 
-### 🖼️ EndPoints Principais
+### ⚙️ EndPoints
 
 Cadastro e login autenticado
 
 | Método | EndPoint | Descrição |
 |--------|-------------|-----------|
-| POST | **/api/auth/register** | Registrar novo usuário |
+| POST | **/api/auth/register**| Registrar novo usuário |
 | POST | **/api/auth/login** | Autenticar usuário |
-
-Operações com o cadastro do usuário
-
-| Método | EndPoint | Descrição |
-|--------|-------------|-----------|
 | GET| **/api/usuarios/id** | Pesquisar o usuário por ID |
 | GET | **/api/info/usuarios/id** | Pesquisar as informações do usuário por ID |
 | PUT | **/api/editar/usuario/id** | Editar o usuário por ID |
 | POST | **/api/cadastros/info/usuarios/novo** | Design moderno e responsivo |
-
-Operações com medidas
-
-| Método | EndPoint | Descrição |
-|--------|-------------|-----------|
 | GET | **/api/medida/id** | Retorna medida por ID |
 | GET | **/api/medidas/id** | Retorna lista de medidas por ID do usuário |
 | GET | **/api/medidas/imc/id** | Retorna IMC do usuário |
 | POST | **/api/cadastros/medida/novo** | Registrar novas medidas |
 | PUT | **/api/editar/medida/id** | Editar medida por ID |
 | DELETE | **/api/medida/id** | Deletar medida por ID |
-
-Operações com refeição
-
-| Método | EndPoint | Descrição |
-|--------|-------------|-----------|
 | GET | **/api/refeicao/id** | Retorna refeicao por ID |
 | GET | **/api/refeicoes/id** | Retorna lista de refeicoes por ID do usuário |
 | POST | **/api/cadastros/refeicao/novo** | Registrar novas refeições |
 | PUT | **/api/editar/refeicao/id** | Editar refeicao por ID |
 | DELETE | **/api/refeicao/id** | Deletar refeicao por ID |
-
-Operações com alimento
-
-| Método | EndPoint | Descrição |
-|--------|-------------|-----------|
 | GET | **/api/alimento/id** | Retorna alimento por ID |
 | PUT | **/api/editar/alimento/id** | Editar alimento por ID |
 | DELETE | **/api/alimento/id** | Deletar alimento por ID |
-
-Geração de relatórios
-
-| Método | EndPoint | Descrição |
-|--------|-------------|-----------|
 | POST | **/api/medidas/download** | Gera relatório de medidas conforme json enviado |
 | POST | **/api/refeicoes/download** | Gera relatório de refeições conforme json enviado | |
 
