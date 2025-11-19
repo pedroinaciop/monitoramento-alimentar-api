@@ -9,6 +9,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -28,7 +31,6 @@ public class AlimentoService {
 
         return objectMapper.convertValue(alimento, AlimentoResponseDTO.class);
     }
-
 
     public ResponseEntity<String> deleteAlimento(Long id) {
         Optional<Alimento> alimento = repository.findById(id);

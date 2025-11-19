@@ -23,7 +23,7 @@ public class EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom("monitoramente_saude@adminpainel.store");
+        helper.setFrom("monitoramento.alimentar0@gmail.com");
         helper.setTo(dados.to().toLowerCase());
         helper.setSubject(dados.subject());
         helper.setText(dados.body());
@@ -42,7 +42,7 @@ public class EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-        helper.setFrom("monitoramente_saude@adminpainel.store");
+        helper.setFrom("monitoramento.alimentar0@gmail.com");
         helper.setTo(dados.to().toLowerCase());
         helper.setSubject(dados.subject());
         helper.setText(dados.body());

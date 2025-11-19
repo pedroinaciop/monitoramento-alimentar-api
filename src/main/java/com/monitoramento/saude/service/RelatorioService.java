@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -79,6 +80,11 @@ public class RelatorioService {
             LOGGER.info("Exportando para PDF...");
             byte[] pdf = JasperExportManager.exportReportToPdf(print);
             LOGGER.info("✅ PDF gerado - Tamanho: {} bytes", pdf.length);
+
+            if (pdf.length <= 12286) {
+                LOGGER.warn("❌ RELATÓRIO VAZIO");
+                throw new RuntimeException("Sem informações para o período informado!");
+            }
 
             return pdf;
 

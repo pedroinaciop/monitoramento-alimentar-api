@@ -36,6 +36,12 @@ public class RelatorioController {
         try {
             byte[] pdf = service.relatorioMedidasDownload(param.usuarioId(), param.dataInicial(), param.dataFinal());
 
+            if (pdf == null || pdf.length == 0) {
+                System.out.println("❌ RELATÓRIO REFEIÇÕES VAZIO");
+                return ResponseEntity.badRequest()
+                        .body("Erro: Nenhuma refeição encontrada para o período selecionado");
+            }
+
             LOGGER.info("✅ Relatório de medidas gerado com sucesso");
 
             return ResponseEntity.ok()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 6.20.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="refeicoes" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a5f2a21-7ca9-490c-8302-46cdaf4e7456">
+<jasperReport whenNoDataType="NoDataSection" xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="refeicoes" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a5f2a21-7ca9-490c-8302-46cdaf4e7456">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL Connection"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="281"/>
@@ -210,7 +210,7 @@ ORDER BY r.data_registro DESC;]]>
 		<band height="150" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="282" y="30" width="238" height="30" uuid="72b140f4-6a52-4481-99ff-ec02479a0154">
+				<reportElement x="281" y="30" width="239" height="30" uuid="72b140f4-6a52-4481-99ff-ec02479a0154">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41a5d8e7-a82c-4b34-a80e-de67ba8214f5"/>
 				</reportElement>
 				<box>
@@ -316,7 +316,8 @@ ORDER BY r.data_registro DESC;]]>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss", new java.util.Locale("pt", "BR"))
+    .format(new java.util.Date())]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="490" y="20" width="30" height="30" uuid="4e8e3036-e2b0-49e6-9a69-29a52e101cd5">
@@ -329,4 +330,22 @@ ORDER BY r.data_registro DESC;]]>
 			</textField>
 		</band>
 	</pageFooter>
+	<noData>
+		<band height="50">
+			<staticText>
+				<reportElement x="205" y="10" width="150" height="30" uuid="e28e05b7-1653-494c-95de-0bb7b4adadd8"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<topPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<leftPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<bottomPen lineWidth="0.5" lineColor="#D2D2D2"/>
+					<rightPen lineWidth="0.5" lineColor="#D2D2D2"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nenhum dado encontrado]]></text>
+			</staticText>
+		</band>
+	</noData>
 </jasperReport>
