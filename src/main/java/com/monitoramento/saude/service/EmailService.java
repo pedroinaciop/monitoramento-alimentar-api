@@ -1,8 +1,8 @@
 package com.monitoramento.saude.service;
 
 import com.monitoramento.saude.dto.EmailDTO;
-import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,7 +10,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class EmailService {
+
     private final JavaMailSender mailSender;
     private final RelatorioService relatorioService;
 
@@ -19,41 +21,55 @@ public class EmailService {
         this.relatorioService = relatorioService;
     }
 
-    public ResponseEntity<String> sendMailRelatorioMedidas(EmailDTO dados) throws MessagingException {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+    public ResponseEntity<String> sendMailRelatorioRefeicoes(EmailDTO dados) {
+        log.info("=== 🚨 EMAIL SERVICE INICIADO ===");
 
-        helper.setFrom("monitoramento.alimentar0@gmail.com");
-        helper.setTo(dados.to().toLowerCase());
-        helper.setSubject(dados.subject());
-        helper.setText(dados.body());
+        try {
+            log.info("1. Dados recebidos - To: {}, UserId: {}", dados.to(), dados.usuarioId());
 
-        byte[] relatorio = relatorioService.relatorioMedidasDownload(dados.usuarioId(), dados.dataInicial(), dados.dataFinal());
+            // Testar JavaMailSender
+            log.info("2. JavaMailSender: {}", mailSender != null ? "OK" : "NULL");
 
-        ByteArrayResource resource = new ByteArrayResource(relatorio);
+            // GERAR RELATÓRIO PRIMEIRO
+            log.info("3. Gerando relatório...");
+            byte[] relatorio;
+            try {
+                relatorio = relatorioService.relatorioRefeicoesDownload(
+                        dados.usuarioId(), dados.dataInicial(), dados.dataFinal());
+                log.info("4. Relatório gerado - Tamanho: {} bytes", relatorio.length);
+            } catch (Exception e) {
+                log.error("❌ ERRO NO RELATÓRIO: {}", e.getMessage(), e);
+                return ResponseEntity.status(500).body("Erro relatório: " + e.getMessage());
+            }
 
-        helper.addAttachment("relatorio-medidas.pdf", resource);
+            // PREPARAR EMAIL
+            log.info("5. Preparando email...");
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-        mailSender.send(mimeMessage);
-        return ResponseEntity.ok("E-mail enviado com sucesso");
-    }
+            helper.setFrom("monitoramento.alimentar0@gmail.com");
+            helper.setTo(dados.to());
+            helper.setSubject(dados.subject());
+            helper.setText(dados.body(), true);
 
-    public ResponseEntity<String> sendMailRelatorioRefeicoes(EmailDTO dados) throws MessagingException {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            ByteArrayResource resource = new ByteArrayResource(relatorio);
+            helper.addAttachment("relatorio-refeicoes.pdf", resource);
 
-        helper.setFrom("monitoramento.alimentar0@gmail.com");
-        helper.setTo(dados.to().toLowerCase());
-        helper.setSubject(dados.subject());
-        helper.setText(dados.body());
+            // ENVIAR EMAIL
+            log.info("6. Enviando email...");
+            mailSender.send(mimeMessage);
 
-        byte[] relatorio = relatorioService.relatorioRefeicoesDownload(dados.usuarioId(), dados.dataInicial(), dados.dataFinal());
+            log.info("✅ EMAIL ENVIADO COM SUCESSO");
+            return ResponseEntity.ok("E-mail enviado com sucesso");
 
-        ByteArrayResource resource = new ByteArrayResource(relatorio);
+        } catch (Exception e) {
+            log.error("❌ ERRO CRÍTICO NO EMAIL SERVICE");
+            log.error("Tipo: {}", e.getClass().getName());
+            log.error("Mensagem: {}", e.getMessage());
+            log.error("Stack Trace completo:", e);
 
-        helper.addAttachment("relatorio-refeicoes.pdf", resource);
-
-        mailSender.send(mimeMessage);
-        return ResponseEntity.ok("E-mail enviado com sucesso");
+            return ResponseEntity.status(500)
+                    .body("Erro interno: " + e.getClass().getSimpleName() + " - " + e.getMessage());
+        }
     }
 }
