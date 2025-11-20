@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Refeições</title>
+    <style>
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          line-height: 1.6;
+          color: #333;
+          margin: 0;
+          padding: 20px;
+          background-color: #f5f5f5;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+        }
+        .header {
+          background-color: #169559;
+          color: white;
+          padding: 20px;
+          text-align: center;
+        }
+        .header h1 {
+          margin: 0;
+          font-size: 22px;
+          font-weight: 600;
+        }
+        .content {
+          padding: 25px;
+        }
+        .footer {
+          background-color: #f8f9fa;
+          padding: 15px 25px;
+          text-align: center;
+          font-size: 12px;
+          color: #6c757d;
+          border-top: 1px solid #e9ecef;
+        }
+        .patient-info {
+          background-color: #f8f9fa;
+          border-left: 4px solid #169559;
+          padding: 15px;
+          margin: 20px 0;
+          border-radius: 0 4px 4px 0;
+        }
+        .highlight {
+          color: #169559;
+          font-weight: 600;
+        }
+        .attachment-note {
+          background-color: #e8f4fd;
+          border: 1px solid #1eb882;
+          border-radius: 4px;
+          padding: 12px;
+          margin-top: 20px;
+          font-size: 14px;
+        }
+        .signature {
+          margin-top: 25px;
+          border-top: 1px solid #e9ecef;
+          padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Relatório de Refeições do Paciente</h1>
+    </div>
+
+    <div class="content">
+        <p>Prezado(a),</p>
+
+        <p>Segue em anexo o relatório completo das refeições do paciente referente ao período especificado.</p>
+
+        <div class="patient-info">
+            <p><strong>Paciente:</strong> <span class="highlight">${to}</span></p>
+            <p><strong>Período do relatório:</strong> <span class="highlight">${dataInicial}</span> a <span class="highlight">${dataFinal}</span></p>
+        </div>
+
+        <p>O documento contém todas as refeições registradas durante o período mencionado.</p>
+
+        <div class="attachment-note">
+            <p><strong>Importante:</strong> Este relatório está anexo a esta mensagem em formato PDF.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Monitoramento Alimentar. Todos os direitos reservados.</p>
+    </div>
+</div>
+</body>
+</html>

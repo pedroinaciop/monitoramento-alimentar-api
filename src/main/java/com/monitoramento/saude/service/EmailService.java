@@ -1,18 +1,22 @@
 package com.monitoramento.saude.service;
 
 import com.monitoramento.saude.dto.EmailDTO;
+import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-@Service
-@Slf4j
-public class EmailService {
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
 
+@Service
+public class EmailService {
     private final JavaMailSender mailSender;
     private final RelatorioService relatorioService;
 
@@ -21,55 +25,53 @@ public class EmailService {
         this.relatorioService = relatorioService;
     }
 
-    public ResponseEntity<String> sendMailRelatorioRefeicoes(EmailDTO dados) {
-        log.info("=== 🚨 EMAIL SERVICE INICIADO ===");
+    public ResponseEntity<String> sendMailRelatorioMedidas(EmailDTO dados) throws MessagingException, IOException {
+        String html;
+        ClassPathResource resource = new ClassPathResource("templates/EmailMedidas.html");
+        html = Files.readString(resource.getFile().toPath(), StandardCharsets.UTF_8);
 
-        try {
-            log.info("1. Dados recebidos - To: {}, UserId: {}", dados.to(), dados.usuarioId());
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-            // Testar JavaMailSender
-            log.info("2. JavaMailSender: {}", mailSender != null ? "OK" : "NULL");
+        helper.setTo(dados.to().toLowerCase());
+        helper.setSubject(dados.subject());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-            // GERAR RELATÓRIO PRIMEIRO
-            log.info("3. Gerando relatório...");
-            byte[] relatorio;
-            try {
-                relatorio = relatorioService.relatorioRefeicoesDownload(
-                        dados.usuarioId(), dados.dataInicial(), dados.dataFinal());
-                log.info("4. Relatório gerado - Tamanho: {} bytes", relatorio.length);
-            } catch (Exception e) {
-                log.error("❌ ERRO NO RELATÓRIO: {}", e.getMessage(), e);
-                return ResponseEntity.status(500).body("Erro relatório: " + e.getMessage());
-            }
+        html = html.replace("${to}",dados.to().toLowerCase());
+        html = html.replace("${dataInicial}", sdf.format(dados.dataInicial()));
+        html = html.replace("${dataFinal}", sdf.format(dados.dataFinal()));
 
-            // PREPARAR EMAIL
-            log.info("5. Preparando email...");
-            MimeMessage mimeMessage = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        byte[] relatorio = relatorioService.relatorioMedidasDownload(dados.usuarioId(), dados.dataInicial(), dados.dataFinal());
+        ByteArrayResource resourceGerado = new ByteArrayResource(relatorio);
+        helper.addAttachment("relatorio-medidas.pdf", resourceGerado);
 
-            helper.setFrom("monitoramento.alimentar0@gmail.com");
-            helper.setTo(dados.to());
-            helper.setSubject(dados.subject());
-            helper.setText(dados.body(), true);
+        helper.setText(html, true);
+        mailSender.send(mimeMessage);
+        return ResponseEntity.ok("E-mail enviado com sucesso");
+    }
 
-            ByteArrayResource resource = new ByteArrayResource(relatorio);
-            helper.addAttachment("relatorio-refeicoes.pdf", resource);
+    public ResponseEntity<String> sendMailRelatorioRefeicoes(EmailDTO dados) throws MessagingException, IOException {
+        String html;
+        ClassPathResource resource = new ClassPathResource("templates/EmailRefeicoes.html");
+        html = Files.readString(resource.getFile().toPath(), StandardCharsets.UTF_8);
 
-            // ENVIAR EMAIL
-            log.info("6. Enviando email...");
-            mailSender.send(mimeMessage);
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-            log.info("✅ EMAIL ENVIADO COM SUCESSO");
-            return ResponseEntity.ok("E-mail enviado com sucesso");
+        helper.setTo(dados.to().toLowerCase());
+        helper.setSubject(dados.subject());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        } catch (Exception e) {
-            log.error("❌ ERRO CRÍTICO NO EMAIL SERVICE");
-            log.error("Tipo: {}", e.getClass().getName());
-            log.error("Mensagem: {}", e.getMessage());
-            log.error("Stack Trace completo:", e);
+        html = html.replace("${to}",dados.to().toLowerCase());
+        html = html.replace("${dataInicial}", sdf.format(dados.dataInicial()));
+        html = html.replace("${dataFinal}", sdf.format(dados.dataFinal()));
 
-            return ResponseEntity.status(500)
-                    .body("Erro interno: " + e.getClass().getSimpleName() + " - " + e.getMessage());
-        }
+        byte[] relatorio = relatorioService.relatorioRefeicoesDownload(dados.usuarioId(), dados.dataInicial(), dados.dataFinal());
+        ByteArrayResource relatorioGerado = new ByteArrayResource(relatorio);
+        helper.addAttachment("relatorio-refeicoes.pdf", relatorioGerado);
+
+        helper.setText(html, true);
+        mailSender.send(mimeMessage);
+        return ResponseEntity.ok("E-mail enviado com sucesso");
     }
 }
