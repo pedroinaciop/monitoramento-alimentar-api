@@ -18,11 +18,13 @@ public class RefeicaoController {
         this.service = service;
     }
 
+    @Transactional
     @GetMapping("/refeicao/{id}")
     public RefeicaoResponseDTO findRefeicaoById(@PathVariable("id") Long id) {
         return service.findRefeicaoById(id);
     }
 
+    @Transactional
     @GetMapping("/refeicoes/{id}")
     public List<RefeicaoResponseDTO> findAllRefeicoesById(@PathVariable("id") Long id) {
         return service.findAllRefeicoesById(id);

@@ -15,6 +15,7 @@ public class UsuarioController {
     @Autowired
     private UserService service;
 
+    @Transactional
     @GetMapping("/usuario/{id}")
     public UserDTO findUserById(@PathVariable Long id) {
         return service.getUserById(id);
