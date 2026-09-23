@@ -8,7 +8,10 @@ import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,6 +26,25 @@ class MonitoramentoDataSourceConfigTest {
                     "monitoramento.datasource.driver-class-name=com.mysql.cj.jdbc.Driver",
                     "monitoramento.datasource.hikari.maximum-pool-size=7");
 
+    @Test
+    void applicationPropertiesUseTheIsolatedDatasourcePrefix() throws IOException {
+        Properties properties = new Properties();
+        try (InputStream input = getClass().getResourceAsStream("/application.properties")) {
+            assertThat(input).isNotNull();
+            properties.load(input);
+        }
+
+        assertThat(properties.getProperty("monitoramento.datasource.url"))
+                .isEqualTo("${MONITORAMENTO_DATASOURCE_URL}");
+        assertThat(properties.getProperty("monitoramento.datasource.username"))
+                .isEqualTo("${MONITORAMENTO_DATASOURCE_USERNAME}");
+        assertThat(properties.getProperty("monitoramento.datasource.password"))
+                .isEqualTo("${MONITORAMENTO_DATASOURCE_PASSWORD}");
+        assertThat(properties).doesNotContainKeys(
+                "spring.datasource.url",
+                "spring.datasource.username",
+                "spring.datasource.password");
+    }
     @Test
     void ignoresGlobalDatabaseSettingsFromAnotherProject() {
         runner.withInitializer(context -> context.getEnvironment().getPropertySources().addFirst(
