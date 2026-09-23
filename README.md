@@ -151,3 +151,15 @@ React Documentation. Disponível em: https://react.dev</br>
 Organização Mundial da Saúde (OMS). Índice de Massa Corporal (IMC). Disponível em: https://www.who.int</br>
 ALURA Cursos Online.</br>
 DEITEL, Paul; DEITEL, Harvey. Java: Como Programar. Pearson, 2017.</br>
+
+### Configuração isolada do banco
+
+O backend usa o prefixo `monitoramento.datasource` no `application.properties`.
+Variáveis genéricas `SPRING_DATASOURCE_*` de outros projetos não alteram essa conexão.
+Para configurar o banco por ambiente, use `MONITORAMENTO_DATASOURCE_URL`,
+`MONITORAMENTO_DATASOURCE_USERNAME` e `MONITORAMENTO_DATASOURCE_PASSWORD`.
+As opções do pool continuam em `monitoramento.datasource.hikari.*`.
+O banco configurado para este projeto é `monitoramento_saude`.
+
+Teste de isolamento, sem abrir conexão com o banco:
+`./mvnw -Dtest=MonitoramentoDataSourceConfigTest test`
